@@ -1,0 +1,89 @@
+body {
+  background-color: #114357;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: white;
+}
+
+p {
+  color: white;
+}
+
+lead {
+  color: white;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+tbody tr:hover {
+  background-color: white;
+  color: #252525 !important;
+}
+
+tbody tr a:hover {
+  background-color: white;
+  color: #252525 !important;
+}
+
+nav ul {
+  margin-top: 2em;
+  padding: 0;
+  font-size: 1.3em;
+}
+
+nav ul li {
+  display: inline-block;
+  list-style-type: none;
+}
+
+nav > ul > li > a {
+  color: #ffffff;
+  display: block;
+  line-height: 2em;
+  padding-right: 1em;
+  text-decoration: none;
+}
+
+nav > ul > li > a:hover {
+  color: #ffffff;
+  display: block;
+  line-height: 2em;
+  padding-right: 1em;
+  font-weight: 600;
+}
+
+.active {
+  text-decoration-line: overline;
+}
+
+.btn-group {
+  margin-top: 2em;
+}
+
+.search-button {
+  background-color: #114357;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+.searchbar {
+  margin-top: 2em;
+}
+
+.table {
+  color: white !important;
+}
