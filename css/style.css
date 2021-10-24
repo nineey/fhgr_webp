@@ -1,37 +1,29 @@
+/* Define some CSS variables */
+:root {
+  --primary-color: #114357;
+  --secondary-color: #ffffff;
+}
+
+/* Global CSS */
+
 body {
-  background-color: #114357;
+  background-color: var(--primary-color);
 }
 
 h1,
 h2,
 h3,
 h4 {
-  color: white;
+  color: var(--secondary-color);
 }
 
 p {
-  color: white;
+  color: var(--secondary-color);
 }
 
 lead {
-  color: white;
+  color: var(--secondary-color);
 }
-
-a {
-  color: white;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: none;
-  font-weight: 500;
-  color: black;
-}
-
-/* tbody tr:hover {
-  background-color: lightgrey;
-  color: #252525 !important;
-} */
 
 nav ul {
   margin-top: 2em;
@@ -45,7 +37,7 @@ nav ul li {
 }
 
 nav > ul > li > a {
-  color: #ffffff;
+  color: var(--secondary-color);
   display: block;
   line-height: 2em;
   padding-right: 1em;
@@ -53,7 +45,7 @@ nav > ul > li > a {
 }
 
 nav > ul > li > a:hover {
-  color: #ffffff;
+  color: var(--secondary-color);
   display: block;
   line-height: 2em;
   padding-right: 1em;
@@ -64,16 +56,18 @@ nav > ul > li > a:hover {
   text-decoration-line: overline;
 }
 
+/* CSS index.html */
+
 .btn-group {
   margin-top: 2em;
 }
 
 .search-button {
-  background-color: #114357;
+  background-color: var(--primary-color);
   border-radius: 4px;
   text-decoration: none;
-  color: #ffffff;
-  border: 2px solid #ffffff;
+  color: var(--secondary-color);
+  border: 2px solid var(--secondary-color);
 }
 
 .searchbar {
@@ -81,5 +75,5 @@ nav > ul > li > a:hover {
 }
 
 .table {
-  color: white !important;
+  color: var(--secondary-color);
 }
