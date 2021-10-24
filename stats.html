@@ -15,6 +15,15 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 
+    <!-- ChartJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <!-- Custom JS -->
+    <script type="module" src="./js/api.js" defer></script>
+    <script type="module" src="./js/chart.js" defer></script>
+
+
+
 </head>
 
 <body>
@@ -23,7 +32,7 @@
         <div class="row" style="margin-top: 2em;text-align: left;">
             <divstyle="text-align: left;color: rgb(33, 37, 41);">
                 <h1 style="font-size: 4em;color: rgb(255,255,255);">Netflix<br /></h1>
-                <h1 style="font-size: 2em;color: rgb(255,255,255);">2016 – 2021<br /></h1>
+                <h1 style="font-size: 2em;color: rgb(255,255,255);">2016 – 2021 (currently using mock data)<br /></h1>
         </div>
         <div class="row">
             <nav>
@@ -39,7 +48,7 @@
 
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3">
 
                 <!-- Selector for All / Movies / TV Shows -->
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
@@ -54,6 +63,30 @@
                 </div>
             </div>
 
+        </div>
+        <div class="row">
+            <div class="col-md-3 mt-3">
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Genre (not working)</option>
+                    <option value="1">Action</option>
+                    <option value="2">Fantasy</option>
+                    <option value="3">Thriller</option>
+                </select>
+            </div>
+
+        </div>
+
+
+        <!-- placeholder for the chart -->
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+
+            <div class="col-md-6" id="someStats">
+                <h3>Some numbers</h3>
+                <ul style="color:white" id="statsList"></ul>
+            </div>
 
         </div>
 
@@ -71,6 +104,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+
 </body>
 
 </html>

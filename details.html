@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">$
+    <link rel="stylesheet" href="css/style.css">
 
     <!-- Custom JS -->
     <script type="module" src="./js/details.js" defer></script>
@@ -48,15 +48,41 @@
             <main>
                 <h3 class="mt-5 mb-5" id=details_title></h3>
 
-                <div>
-                    <lead><strong>Cast</strong></lead>
-                    <p id="details_cast"></p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div>
+                            <lead><strong>Type</strong></lead>
+                            <p id="details_type"></p>
+                        </div>
+                        <div>
+                            <lead><strong>Director</strong></lead>
+                            <p id="details_director"></p>
+                        </div>
+                        <div>
+                            <lead><strong>Duration</strong></lead>
+                            <p id="details_duration"></p>
+                        </div>
+                        <div>
+                            <lead><strong>On Netflix since</strong></lead>
+                            <p id="details_added"></p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div>
+                            <lead><strong>Cast</strong></lead>
+                            <p id="details_cast"></p>
+                        </div>
+
+                        <div>
+                            <lead><strong>Description</strong></lead>
+                            <p id="details_description"></p>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div>
-                    <lead><strong>Description</strong></lead>
-                    <p id="details_description"></p>
-                </div>
+
             </main>
         </div>
 

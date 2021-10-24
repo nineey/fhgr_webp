@@ -7,7 +7,6 @@ async function getNetflixData() {
   // Convert the response into json format
   const netflixData = await response.json();
 
-  console.log(netflixData);
   return netflixData;
 }
 
