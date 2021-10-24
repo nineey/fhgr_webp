@@ -78,12 +78,12 @@ document
 
 document
   .getElementById("btnradio2")
-  .addEventListener("click", async (filter) => {
-    const moviesOnly = await filter_netflix_data("Movie");
+  .addEventListener("click", async (filtershowsOnly) => {
+    const showsOnly = await filter_netflix_data("Movie");
     let tbody = document.getElementById("append_netflix_list");
     tbody.innerHTML = null;
 
-    moviesOnly.forEach((element) => {
+    showsOnly.forEach((element) => {
       const tr = document.createElement("tr");
       tbody.appendChild(tr);
 
@@ -117,12 +117,12 @@ document
 // btn TV Shows
 document
   .getElementById("btnradio3")
-  .addEventListener("click", async (noFilter) => {
-    const moviesOnly = await filter_netflix_data("TV Show");
+  .addEventListener("click", async (filterShowsOnly) => {
+    const showsOnly = await filter_netflix_data("TV Show");
     let tbody = document.getElementById("append_netflix_list");
     tbody.innerHTML = null;
 
-    moviesOnly.forEach((element) => {
+    showsOnly.forEach((element) => {
       const tr = document.createElement("tr");
       tbody.appendChild(tr);
 
