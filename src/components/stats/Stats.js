@@ -7,7 +7,12 @@ export class Stats extends Component {
     return (
       <>
         <ChartFilter />
-        <Chart />
+
+        <div class="row">
+          <div class="col-sm-6">
+            <Chart />
+          </div>
+        </div>
       </>
     );
   }
