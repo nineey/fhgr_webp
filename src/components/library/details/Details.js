@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import React from "react";
+import { useParams } from "react-router-dom";
 
 // export class Details extends Component {
 //   render() {
@@ -14,17 +14,28 @@ import { useParams, useLocation } from "react-router-dom";
 function Details(props) {
   let netflixLibrary = props.netflixLibrary;
   const { show_id } = useParams();
-  const getDetailsById = netflixLibrary.find(
-    ({ show_id }) => show_id === show_id
-  );
+  let getDetailsById;
 
-  //   console.log(getDetailsById);
-  //   console.log(getDetailsById[0].title);
+  if (netflixLibrary) {
+    // console.log(show_id);
+    getDetailsById = netflixLibrary.find(
+      (element) => element.show_id === show_id
+    );
+    // console.log(getDetailsById);
+  }
 
   return (
     <>
-      <div>Show ID: {show_id}</div>
-      <div>Title: {getDetailsById.title}</div>
+      {getDetailsById ? (
+        <>
+          <ul>
+            <li>{getDetailsById.show_id}</li>
+            <li>{getDetailsById.title}</li>
+          </ul>
+        </>
+      ) : (
+        "Loading..."
+      )}
     </>
   );
 }

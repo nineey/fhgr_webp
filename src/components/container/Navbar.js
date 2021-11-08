@@ -12,26 +12,43 @@ function Navbar() {
   // console.log(pathname);
 
   // Show an arrow if navlink is active
-  const nav1 = pathname == "/" ? "> Full Library" : "Full Library";
-  const nav2 = pathname == "/stats" ? "> Stats" : "Stats";
+  const nav1 = pathname === "/" ? "> Full Library" : "Full Library";
+  const nav2 = pathname === "/stats" ? "> Stats" : "Stats";
+  const navBack = "< Back";
 
-  return (
-    <StyledNavbar>
-      <nav>
-        <ul>
-          <li>
-            <NavLink to="/">{nav1}</NavLink>
-          </li>
+  if (pathname === "/" || pathname === "/stats") {
+    return (
+      <StyledNavbar>
+        <nav>
+          <ul>
+            <li>
+              <NavLink to="/">{nav1}</NavLink>
+            </li>
 
-          <li>
-            <NavLink to="stats">{nav2}</NavLink>
-          </li>
-        </ul>
-      </nav>
+            <li>
+              <NavLink to="stats">{nav2}</NavLink>
+            </li>
+          </ul>
+        </nav>
 
-      <hr className="mt-5"></hr>
-    </StyledNavbar>
-  );
+        <hr className="mt-5"></hr>
+      </StyledNavbar>
+    );
+  } else {
+    return (
+      <StyledNavbar>
+        <nav>
+          <ul>
+            <li>
+              <NavLink to="/">{navBack}</NavLink>
+            </li>
+          </ul>
+        </nav>
+
+        <hr className="mt-5"></hr>
+      </StyledNavbar>
+    );
+  }
 }
 
 const StyledNavbar = styled.div`

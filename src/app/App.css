@@ -27,3 +27,9 @@ a:hover {
   text-decoration: none;
   font-weight: 500;
 }
+
+footer {
+  bottom: 0;
+  height: 100%; /* Height of the footer */
+  margin-top: 5em;
+}

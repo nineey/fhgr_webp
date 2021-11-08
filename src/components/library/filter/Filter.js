@@ -9,27 +9,27 @@ export class Filter extends Component {
         <button
           type="button"
           className={
-            className + (this.props.activeGenre === "All" ? " active" : "")
+            className + (this.props.activeType === null ? " active" : "")
           }
-          onClick={() => this.props.setActiveGenre("All")}
+          onClick={() => this.props.setActiveType(null)}
         >
           All
         </button>
         <button
           type="button"
           className={
-            className + (this.props.activeGenre === "Movie" ? " active" : "")
+            className + (this.props.activeType === "Movie" ? " active" : "")
           }
-          onClick={() => this.props.setActiveGenre("Movie")}
+          onClick={() => this.props.setActiveType("Movie")}
         >
           Movies
         </button>
         <button
           type="button"
           className={
-            className + (this.props.activeGenre === "TVShow" ? " active" : "")
+            className + (this.props.activeType === "TV Show" ? " active" : "")
           }
-          onClick={() => this.props.setActiveGenre("TVShow")}
+          onClick={() => this.props.setActiveType("TV Show")}
         >
           TV Shows
         </button>

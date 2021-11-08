@@ -36,29 +36,30 @@ class App extends Component {
 
   render() {
     return (
-      <StyledApp className="container">
-        <Header />
-        <Navbar />
-        <Routes>
-          <Route
-            path="/"
-            element={<Library netflixLibrary={this.state.data} />}
-          />
-          <Route path="/stats" element={<Stats />} />
-          <Route
-            path="/details/:show_id"
-            element={<Details netflixLibrary={this.state.data} />}
-          />
-        </Routes>
+      <>
+        <StyledApp className="container">
+          <Header />
+          <Navbar />
+          <Routes>
+            <Route
+              path="/"
+              element={<Library netflixLibrary={this.state.data} />}
+            />
+            <Route path="/stats" element={<Stats />} />
+            <Route
+              path="/details/:show_id"
+              element={<Details netflixLibrary={this.state.data} />}
+            />
+          </Routes>
+        </StyledApp>
         <Footer />
-      </StyledApp>
+      </>
     );
   }
 }
 
 const StyledApp = styled.div`
-  // margin: auto;
-  // width: 50%;
+  min-height: calc(90vh - 3.5em);
 `;
 
 export default App;

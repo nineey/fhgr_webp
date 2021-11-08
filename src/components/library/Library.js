@@ -1,31 +1,51 @@
 import React, { Component } from "react";
 import Filter from "./filter/Filter";
 import Search from "./filter/Search";
+import GenreSelector from "./filter/Select";
 import List from "./list/List";
 
 export class Library extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeGenre: "All",
+      activeType: null,
+      selectedGenre: null,
     };
   }
 
-  setActiveGenre = (genre) => {
-    this.setState({ activeGenre: genre });
+  // Handle type buttons (All/Movie/Tv show)
+  setActiveType = (type) => {
+    this.setState({ activeType: type });
+  };
+
+  handleSelectedGenre = (selectedGenre) => {
+    this.setState({ selectedGenre: selectedGenre });
   };
 
   render() {
     return (
       <>
-        <Filter
-          setActiveGenre={this.setActiveGenre}
-          activeGenre={this.state.activeGenre}
-        />
-        <Search />
+        <div className="row">
+          <div className="col-sm-6">
+            <Filter
+              setActiveType={this.setActiveType}
+              activeType={this.state.activeType}
+            />
+            <GenreSelector
+              selectedGenre={this.state.selectedGenre}
+              handleSelectedGenre={this.handleSelectedGenre}
+            />
+          </div>
+
+          <div className="col-sm-6">
+            <Search />
+          </div>
+        </div>
+
         <List
           netflixLibrary={this.props.netflixLibrary}
-          activeGenre={this.state.activeGenre}
+          activeType={this.state.activeType}
+          selectedGenre={this.state.selectedGenre}
         />
       </>
     );
