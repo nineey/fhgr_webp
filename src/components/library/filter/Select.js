@@ -14,12 +14,12 @@ export default function GenreSelector(props) {
   //   }
   return (
     <Select
+      placeholder="Select genre ..."
       className="mt-3 w-50 text-dark"
       options={options}
       onChange={props.handleSelectedGenre}
       isClearable={true}
       clearValue={null}
-      Placeholder="Select genre"
     />
   );
 }
