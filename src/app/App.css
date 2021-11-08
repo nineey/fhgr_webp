@@ -1,0 +1,29 @@
+/* Define some CSS variables */
+:root {
+  --primary-color: #18181b;
+  --secondary-color: #ffffff;
+}
+
+body {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+h1 {
+  font-size: 4em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-weight: 500;
+}
