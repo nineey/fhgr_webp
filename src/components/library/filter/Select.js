@@ -19,6 +19,7 @@ export default function GenreSelector(props) {
       onChange={props.handleSelectedGenre}
       isClearable={true}
       clearValue={null}
+      Placeholder="Select genre"
     />
   );
 }

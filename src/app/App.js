@@ -18,8 +18,8 @@ import Details from "../components/library/details/Details";
 import Footer from "../components/container/Footer";
 
 class App extends Component {
-  // dataSource = "https://data.nicolasneeser.ch/netflix_data_all.json";
-  dataSource = "https://data.nicolasneeser.ch/netflix_data_short.json";
+  dataSource = "https://data.nicolasneeser.ch/netflix_data_all.json";
+  // dataSource = "https://data.nicolasneeser.ch/netflix_data_short.json";
 
   constructor(props) {
     super(props);
@@ -29,7 +29,9 @@ class App extends Component {
   }
 
   componentDidMount = async () => {
-    const data = (await axios.get(this.dataSource)).data;
+    let data = (await axios.get(this.dataSource)).data;
+    // slice data to reduce data
+    data = data.slice(0, 100);
     this.setState({ data: data });
     // console.log(this.state.data);
   };

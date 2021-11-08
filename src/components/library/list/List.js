@@ -37,30 +37,37 @@ export class List extends Component {
         {netflixLibraryFiltered ? (
           // Then check if list has entries
           // If yes, generate list. If no, show message
-          netflixLibraryFiltered.length != 0 ? (
-            <StyledTable className="table table-sm mt-5">
-              <thead>
-                <tr>
-                  <th scope="col">Type</th>
-                  <th scope="col">Title</th>
-                  <th scope="col">Genre</th>
-                  <th scope="col">Details</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* Check for entries in the filtered */}
-                {netflixLibraryFiltered.map((netflixElement) => (
-                  <tr key={netflixElement.show_id}>
-                    <td>{netflixElement.type}</td>
-                    <td>{netflixElement.title}</td>
-                    <td>{netflixElement.listed_in}</td>
-                    <td>
-                      <Link to={`details/${netflixElement.show_id}`}>More</Link>
-                    </td>
+          netflixLibraryFiltered.length !== 0 ? (
+            <>
+              <div className="lead mt-3">
+                #Items: {netflixLibraryFiltered.length}
+              </div>
+              <StyledTable className="table table-sm mt-5">
+                <thead>
+                  <tr>
+                    <th scope="col">Type</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Details</th>
                   </tr>
-                ))}
-              </tbody>
-            </StyledTable>
+                </thead>
+                <tbody>
+                  {/* Check for entries in the filtered */}
+                  {netflixLibraryFiltered.map((netflixElement) => (
+                    <tr key={netflixElement.show_id}>
+                      <td>{netflixElement.type}</td>
+                      <td>{netflixElement.title}</td>
+                      <td>{netflixElement.listed_in}</td>
+                      <td>
+                        <Link to={`details/${netflixElement.show_id}`}>
+                          More
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </StyledTable>
+            </>
           ) : (
             <div className="lead mt-5">No matches :(</div>
           )
