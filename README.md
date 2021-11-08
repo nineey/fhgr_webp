@@ -15,3 +15,5 @@ Install and run the project with npm
   npm start
 
 ```
+
+#### This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
