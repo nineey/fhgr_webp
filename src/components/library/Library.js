@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Filter from "./filter/Filter";
-import Search from "./filter/Search";
+import SearchBar from "./filter/SearchBar";
 import GenreSelector from "./filter/Select";
 import List from "./list/List";
 
@@ -10,6 +10,7 @@ export class Library extends Component {
     this.state = {
       activeType: null,
       selectedGenre: null,
+      searchQuery: null,
     };
   }
 
@@ -21,6 +22,11 @@ export class Library extends Component {
   // Handle state 'selectedGenre' ('null' by default)
   handleSelectedGenre = (selectedGenre) => {
     this.setState({ selectedGenre: selectedGenre });
+  };
+
+  // Handle input in search bar
+  handleSearchBarInput = (searchQuery) => {
+    this.setState({ searchQuery: searchQuery.target.value });
   };
 
   render() {
@@ -39,7 +45,11 @@ export class Library extends Component {
           </div>
 
           <div className="col-sm-6">
-            <Search />
+            <SearchBar
+              value={this.state.searchQuery}
+              handleSearchBarInput={this.handleSearchBarInput}
+              handleSearchBarSubmit={this.handleSearchBarSubmit}
+            />
           </div>
         </div>
 
@@ -47,6 +57,7 @@ export class Library extends Component {
           netflixLibrary={this.props.netflixLibrary}
           activeType={this.state.activeType}
           selectedGenre={this.state.selectedGenre}
+          searchQuery={this.state.searchQuery}
         />
       </>
     );

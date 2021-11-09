@@ -7,8 +7,10 @@ export class List extends Component {
   render() {
     const netflixLibrary = this.props.netflixLibrary;
     let netflixLibraryFiltered; // Filtered according to UI filters and shown on front end.
+    let netflixLibraryFilteredAndSearched; // Additional filter for search query
     const activeType = this.props.activeType;
     const selectedGenre = this.props.selectedGenre;
+    const searchQuery = this.props.searchQuery;
 
     if (netflixLibrary) {
       // Do this when type and genre filters are active
@@ -18,12 +20,12 @@ export class List extends Component {
             netflixTitle.type === activeType &&
             netflixTitle.listed_in.includes(selectedGenre["value"])
         );
-        // Do this when type filter only is active
+        // Do this when only type filter is active
       } else if (activeType != null) {
         netflixLibraryFiltered = netflixLibrary.filter(
           (netflixTitle) => netflixTitle.type === activeType
         );
-        // Do this when genre filter only is active
+        // Do this when only genre filter is active
       } else if (selectedGenre != null) {
         netflixLibraryFiltered = netflixLibrary.filter((netflixTitle) =>
           netflixTitle.listed_in.includes(selectedGenre["value"])
@@ -34,16 +36,26 @@ export class List extends Component {
       }
     }
 
+    // Wait until filtered list is ready. Then check for searchQuery and filter again
+    if (netflixLibraryFiltered && searchQuery !== null && searchQuery !== "") {
+      netflixLibraryFilteredAndSearched = netflixLibraryFiltered.filter(
+        (netflixTitle) =>
+          netflixTitle.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    } else {
+      netflixLibraryFilteredAndSearched = netflixLibraryFiltered;
+    }
+
     return (
       <section className="mainSection">
         {/* First, check if filtered list is ready */}
-        {netflixLibraryFiltered ? (
+        {netflixLibraryFilteredAndSearched ? (
           // Then check if list has entries
           // If yes, generate list. If no, show message
-          netflixLibraryFiltered.length !== 0 ? (
+          netflixLibraryFilteredAndSearched.length !== 0 ? (
             <>
               <div className="lead mt-3">
-                #Items: {netflixLibraryFiltered.length}
+                #Items: {netflixLibraryFilteredAndSearched.length}
               </div>
               <StyledTable className="table table-sm mt-5">
                 <thead>
@@ -56,7 +68,7 @@ export class List extends Component {
                 </thead>
                 <tbody>
                   {/* Loop the filtered list and show elements in table */}
-                  {netflixLibraryFiltered.map((netflixElement) => (
+                  {netflixLibraryFilteredAndSearched.map((netflixElement) => (
                     <tr key={netflixElement.show_id}>
                       <td>{netflixElement.type}</td>
                       <td>{netflixElement.title}</td>
