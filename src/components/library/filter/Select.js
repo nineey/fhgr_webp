@@ -1,6 +1,7 @@
 import React from "react";
 import Select from "react-select";
 
+// Available options to select
 const options = [
   { value: "Documentaries", label: "Documentaries" },
   { value: "International TV Shows", label: "International TV Shows" },
@@ -8,10 +9,8 @@ const options = [
   { value: "TV Mysteries", label: "TV Mysteries" },
 ];
 
+// Return genre selector from 'react-select'
 export default function GenreSelector(props) {
-  //   if (props.selectedGenre) {
-  //     console.log(props.selectedGenre);
-  //   }
   return (
     <Select
       placeholder="Select genre ..."
@@ -19,7 +18,7 @@ export default function GenreSelector(props) {
       options={options}
       onChange={props.handleSelectedGenre}
       isClearable={true}
-      clearValue={null}
+      clearValue={null} // When select is empty, then value = null
     />
   );
 }

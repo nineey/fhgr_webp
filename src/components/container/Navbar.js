@@ -3,15 +3,14 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 
-function Navbar() {
-  // source: https://medium.com/how-to-react/add-an-active-classname-to-the-link-using-react-router-b7c350473916
-  //assigning location variable
+export default function Navbar() {
+  // Source: https://medium.com/how-to-react/add-an-active-classname-to-the-link-using-react-router-b7c350473916
+  // Assigning location variable
   const location = useLocation();
-  //destructuring pathname from location
+  // Destructuring pathname from location
   const { pathname } = location;
-  // console.log(pathname);
 
-  // Show an arrow if navlink is active
+  // Handle different views for active navlinks
   const nav1 = pathname === "/" ? "> Full Library" : "Full Library";
   const nav2 = pathname === "/stats" ? "> Stats" : "Stats";
   const navBack = "< Back";
@@ -71,5 +70,3 @@ const StyledNavbar = styled.div`
     text-decoration: none;
   }
 `;
-
-export default Navbar;

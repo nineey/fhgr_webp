@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 export class Filter extends Component {
   render() {
+    // Used for handling active class of a button
     const className = "btn btn-outline-light";
 
     return (

@@ -1,15 +1,15 @@
 import React from "react";
-// source: https://recharts.org/en-US/examples/SimpleBarChart
+// Source: https://recharts.org/en-US/examples/SimpleBarChart
 import {
   BarChart,
   Bar,
-  Cell,
+  // Cell,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
+  // CartesianGrid,
+  // Tooltip,
   Legend,
-  ResponsiveContainer,
+  // ResponsiveContainer,
 } from "recharts";
 
 const data = [

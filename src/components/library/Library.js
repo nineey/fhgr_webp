@@ -13,11 +13,12 @@ export class Library extends Component {
     };
   }
 
-  // Handle type buttons (All/Movie/Tv show)
+  // Handle state 'activeType' (All/Movie/TV Show)
   setActiveType = (type) => {
     this.setState({ activeType: type });
   };
 
+  // Handle state 'selectedGenre' ('null' by default)
   handleSelectedGenre = (selectedGenre) => {
     this.setState({ selectedGenre: selectedGenre });
   };

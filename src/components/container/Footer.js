@@ -17,8 +17,10 @@ export default function Footer() {
 
 const StyledFooter = styled.div`
   footer {
-    background-color: white;
+    background-color: var(--secondary-color);
     height: 3.5em;
+    bottom: 0;
+    margin-top: 5em;
   }
 
   p {

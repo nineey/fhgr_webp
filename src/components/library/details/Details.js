@@ -1,31 +1,23 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-// export class Details extends Component {
-//   render() {
-//     return (
-//       <>
-//         <div>Details</div>
-//       </>
-//     );
-//   }
-// }
-
-function Details(props) {
+export default function Details(props) {
   let netflixLibrary = props.netflixLibrary;
-  const { show_id } = useParams();
   let getDetailsById;
 
+  // Get the current show id from URL param
+  const { show_id } = useParams();
+
+  // Find and assign the matching element by id
   if (netflixLibrary) {
-    // console.log(show_id);
     getDetailsById = netflixLibrary.find(
       (element) => element.show_id === show_id
     );
-    // console.log(getDetailsById);
   }
 
   return (
     <>
+      {/* If show details are ready, expose the data */}
       {getDetailsById ? (
         <>
           <ul>
@@ -39,5 +31,3 @@ function Details(props) {
     </>
   );
 }
-
-export default Details;

@@ -1,24 +1,24 @@
+// import styles
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+
 // import dependencies
 import React, { Component } from "react";
 import axios from "axios";
 import styled from "styled-components";
-
 import { Routes, Route } from "react-router-dom";
-// import { Home, Stats } from "../pages/pages";
 
 import Header from "../components/container/Header";
 import Navbar from "../components/container/Navbar";
-
-// import styles
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
 import Library from "../components/library/Library";
 import Stats from "../components/stats/Stats";
 import Details from "../components/library/details/Details";
 import Footer from "../components/container/Footer";
 
 class App extends Component {
+  // Full data set (> 8000 items)
   dataSource = "https://data.nicolasneeser.ch/netflix_data_all.json";
+  // Short data set for testing (10 items)
   // dataSource = "https://data.nicolasneeser.ch/netflix_data_short.json";
 
   constructor(props) {
@@ -28,12 +28,13 @@ class App extends Component {
     };
   }
 
+  // Call the API after App component is rendered
   componentDidMount = async () => {
     let data = (await axios.get(this.dataSource)).data;
-    // slice data to reduce data
+    // Slice the set to reduce data
     data = data.slice(0, 100);
+    // Assign to state variable 'data'
     this.setState({ data: data });
-    // console.log(this.state.data);
   };
 
   render() {
