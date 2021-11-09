@@ -4,10 +4,14 @@ import React from "react";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 
-class LoadingSpinner extends React.Component {
-  render() {
-    return <Loader type="TailSpin" color="#ffffff" height={80} width={80} />;
-  }
+export default function LoadingSpinner() {
+  return (
+    <Loader
+      className="mt-3"
+      type="TailSpin"
+      color="#ffffff"
+      height={50}
+      width={50}
+    />
+  );
 }
-
-export default LoadingSpinner;

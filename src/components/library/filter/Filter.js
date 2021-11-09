@@ -1,42 +1,34 @@
-import React, { Component } from "react";
+import React from "react";
 
-export class Filter extends Component {
-  render() {
-    // Used for handling active class of a button
-    const className = "btn btn-outline-light";
+export default function Filter(props) {
+  // Used for handling active class of a button
+  const className = "btn btn-outline-light";
 
-    return (
-      <div className="btn-group" role="group" aria-label="Basic example">
-        <button
-          type="button"
-          className={
-            className + (this.props.activeType === null ? " active" : "")
-          }
-          onClick={() => this.props.setActiveType(null)}
-        >
-          All
-        </button>
-        <button
-          type="button"
-          className={
-            className + (this.props.activeType === "Movie" ? " active" : "")
-          }
-          onClick={() => this.props.setActiveType("Movie")}
-        >
-          Movies
-        </button>
-        <button
-          type="button"
-          className={
-            className + (this.props.activeType === "TV Show" ? " active" : "")
-          }
-          onClick={() => this.props.setActiveType("TV Show")}
-        >
-          TV Shows
-        </button>
-      </div>
-    );
-  }
+  return (
+    <div className="btn-group" role="group" aria-label="Basic example">
+      <button
+        type="button"
+        className={className + (props.activeType === null ? " active" : "")}
+        onClick={() => props.setActiveType(null)}
+      >
+        All
+      </button>
+      <button
+        type="button"
+        className={className + (props.activeType === "Movie" ? " active" : "")}
+        onClick={() => props.setActiveType("Movie")}
+      >
+        Movies
+      </button>
+      <button
+        type="button"
+        className={
+          className + (props.activeType === "TV Show" ? " active" : "")
+        }
+        onClick={() => props.setActiveType("TV Show")}
+      >
+        TV Shows
+      </button>
+    </div>
+  );
 }
-
-export default Filter;

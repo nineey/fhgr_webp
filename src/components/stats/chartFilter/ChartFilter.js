@@ -1,9 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 
-export class ChartFilter extends Component {
-  render() {
-    return <div>ChartFilter</div>;
-  }
+export default function ChartFilter() {
+  return <div>ChartFilter</div>;
 }
-
-export default ChartFilter;

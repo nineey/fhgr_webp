@@ -1,16 +1,16 @@
 import React from "react";
 import Select from "react-select";
 
-// Available options to select
-const options = [
-  { value: "Documentaries", label: "Documentaries" },
-  { value: "International TV Shows", label: "International TV Shows" },
-  { value: "TV Dramas", label: "TV Dramas" },
-  { value: "TV Mysteries", label: "TV Mysteries" },
-];
-
-// Return genre selector from 'react-select'
 export default function GenreSelector(props) {
+  // Available options to select
+  const options = [
+    { value: "Documentaries", label: "Documentaries" },
+    { value: "International TV Shows", label: "International TV Shows" },
+    { value: "TV Dramas", label: "TV Dramas" },
+    { value: "TV Mysteries", label: "TV Mysteries" },
+  ];
+
+  // Return genre selector from 'react-select'
   return (
     <Select
       placeholder="Select genre ..."

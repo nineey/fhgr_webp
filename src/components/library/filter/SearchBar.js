@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 
 export default function SearchBar(props) {
   return (
@@ -23,10 +23,10 @@ export default function SearchBar(props) {
   );
 }
 
-const SearchButton = styled.button`
-  background-color: var(--primary-color);
-  border-radius: 4px;
-  text-decoration: none;
-  color: var(--secondary-color);
-  border: 2px solid var(--secondary-color);
-`;
+// const SearchButton = styled.button`
+//   background-color: var(--primary-color);
+//   border-radius: 4px;
+//   text-decoration: none;
+//   color: var(--secondary-color);
+//   border: 2px solid var(--secondary-color);
+// `;

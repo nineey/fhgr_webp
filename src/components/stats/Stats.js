@@ -1,21 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import Chart from "./chart/Chart";
 import ChartFilter from "./chartFilter/ChartFilter";
 
-export class Stats extends Component {
-  render() {
-    return (
-      <>
-        <ChartFilter />
+export default function Stats() {
+  return (
+    <>
+      <ChartFilter />
 
-        <div class="row">
-          <div class="col-sm-6">
-            <Chart />
-          </div>
+      <div className="row">
+        <div className="col-sm-6">
+          <Chart />
         </div>
-      </>
-    );
-  }
+      </div>
+    </>
+  );
 }
-
-export default Stats;
