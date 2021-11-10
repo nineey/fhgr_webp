@@ -58,6 +58,7 @@ export class Library extends Component {
           activeType={this.state.activeType}
           selectedGenre={this.state.selectedGenre}
           searchQuery={this.state.searchQuery}
+          isLoading={this.state.isLoading}
         />
       </>
     );

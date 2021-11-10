@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -9,9 +9,16 @@ export default function List({
   selectedGenre,
   searchQuery,
 }) {
+  // State Hooks
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Use useMemo to return memoized value (performance booster)
+  // Value is only recalculated when one value in dependencies array has changed
   const netflixLibraryFiltered = useMemo(() => {
     if (!netflixLibrary) return [];
     if (netflixLibrary) {
+      setIsLoading(false);
+
       // Do this when type and genre filters are active
       if (selectedGenre != null && activeType != null) {
         return netflixLibrary.filter(
@@ -48,6 +55,7 @@ export default function List({
 
   return (
     <section className="mainSection">
+      {isLoading ? <LoadingSpinner /> : ""}
       {/* First, check if filtered list is ready */}
       {netflixLibraryFilteredAndSearched ? (
         // Then check if list has entries
