@@ -32,7 +32,7 @@ class App extends Component {
   componentDidMount = async () => {
     let data = (await axios.get(this.dataSource)).data;
     // Slice the set to reduce data
-    data = data.slice(0, 100);
+    data = data.slice(0, 500);
     // Assign to state variable 'data'
     this.setState({ data: data });
   };
