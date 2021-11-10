@@ -20,10 +20,36 @@ export default function Details(props) {
       {/* If show details are ready, expose the data */}
       {getDetailsById ? (
         <>
-          <ul>
-            <li>{getDetailsById.show_id}</li>
-            <li>{getDetailsById.title}</li>
-          </ul>
+          <div className="row mt-4">
+            <div className="lead">{getDetailsById.type}</div>
+            <h3>{getDetailsById.title}</h3>
+          </div>
+          <div class="row">
+            <div className="col-md-4">
+              <p className="mt-4">
+                <strong>Added on Netflix</strong>
+                <br /> {getDetailsById.date_added}
+              </p>
+              <p className="mt-4">
+                <strong>Duration</strong>
+                <br /> {getDetailsById.duration}
+              </p>
+              <p className="mt-4">
+                <strong>Genre</strong>
+                <br /> {getDetailsById.listed_in}
+              </p>
+            </div>
+            <div className="col-md-4">
+              <p className="mt-4">
+                <strong>Cast</strong>
+                <br /> {getDetailsById.cast}
+              </p>
+              <p className="mt-4">
+                <strong>Description</strong>
+                <br /> {getDetailsById.description}
+              </p>
+            </div>
+          </div>
         </>
       ) : (
         "Loading..."
