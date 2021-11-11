@@ -45,8 +45,8 @@ export default function List({
 
   const netflixLibraryFilteredAndSearched = useMemo(() => {
     if (!searchQuery) return netflixLibraryFiltered;
+    // Filter list using searchQuery
     return netflixLibraryFiltered.filter((netflixTitle) => {
-      if (typeof netflixTitle.title !== "string") return false;
       return netflixTitle.title
         .toLowerCase()
         .includes(searchQuery.toLowerCase());
