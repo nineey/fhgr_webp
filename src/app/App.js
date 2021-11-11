@@ -16,11 +16,6 @@ import Details from "../components/library/details/Details";
 import Footer from "../components/container/Footer";
 
 class App extends Component {
-  // Full data set (> 8000 items)
-  dataSource = "https://data.nicolasneeser.ch/netflix_data_all.json";
-  // Short data set for testing (10 items)
-  // dataSource = "https://data.nicolasneeser.ch/netflix_data_short.json";
-
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +25,9 @@ class App extends Component {
 
   // Call the API after App component is rendered
   componentDidMount = async () => {
-    let data = (await axios.get(this.dataSource)).data;
+    const dataSource = "https://data.nicolasneeser.ch/netflix_data_all.json";
+
+    let data = (await axios.get(dataSource)).data;
     // Slice the set to reduce data
     data = data.slice(0, 500);
     // Assign to state variable 'data'

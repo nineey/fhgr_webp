@@ -32,28 +32,30 @@ const dataShows = [
 
 export default function ShowChart({ activeChartFilter }) {
   let data;
-  if (activeChartFilter === "movies" ? (data = dataMovies) : (data = dataShows))
-    return (
-      <>
-        <ResponsiveContainer width={"100%"} height={"100%"}>
-          <BarChart
-            className="chart"
-            width={1000}
-            height={300}
-            data={data}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Legend />
-            <Bar dataKey="data" fill="#ffffff" />
-          </BarChart>
-        </ResponsiveContainer>
-      </>
-    );
+  activeChartFilter === "movies" ? (data = dataMovies) : (data = dataShows);
+
+  if (!data) return "Loading ...";
+  return (
+    <>
+      <ResponsiveContainer width={"100%"} height={"100%"}>
+        <BarChart
+          className="chart"
+          width={1000}
+          height={300}
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Legend />
+          <Bar dataKey="data" fill="#ffffff" />
+        </BarChart>
+      </ResponsiveContainer>
+    </>
+  );
 }
