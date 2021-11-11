@@ -24,7 +24,7 @@ export default function Details(props) {
             <div className="lead">{getDetailsById.type}</div>
             <h3>{getDetailsById.title}</h3>
           </div>
-          <div class="row">
+          <div className="row">
             <div className="col-md-4">
               <p className="mt-4">
                 <strong>Added on Netflix</strong>
