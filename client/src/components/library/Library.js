@@ -3,16 +3,30 @@ import Filter from "./filter/Filter";
 import SearchBar from "./filter/SearchBar";
 import GenreSelector from "./filter/Select";
 import List from "./list/List";
+import Pagination from "./list/Pagination";
+import axios from "axios";
 
 export class Library extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      data: null,
       activeType: null,
       selectedGenre: null,
       searchQuery: null,
+      page: 1,
     };
   }
+
+  componentDidMount = async () => {
+    let data = (await axios.get(`/api?page=${this.state.page}`)).data;
+    this.setState({ data: data });
+  };
+
+  componentDidUpdate = async () => {
+    let data = (await axios.get(`/api?page=${this.state.page}`)).data;
+    this.setState({ data: data });
+  };
 
   // Handle state 'activeType' (All/Movie/TV Show)
   setActiveType = (type) => {
@@ -27,6 +41,11 @@ export class Library extends Component {
   // Handle input in search bar
   handleSearchBarInput = (searchQuery) => {
     this.setState({ searchQuery: searchQuery.target.value });
+  };
+
+  handlePaginationUp = (page) => {
+    this.setState({ page: (this.state.page += 1) });
+    console.log(this.state.page);
   };
 
   render() {
@@ -54,12 +73,13 @@ export class Library extends Component {
         </div>
 
         <List
-          netflixLibrary={this.props.netflixLibrary}
+          netflixLibrary={this.state.data}
           activeType={this.state.activeType}
           selectedGenre={this.state.selectedGenre}
           searchQuery={this.state.searchQuery}
           isLoading={this.state.isLoading}
         />
+        <Pagination handlePaginationUp={this.handlePaginationUp} />
       </>
     );
   }

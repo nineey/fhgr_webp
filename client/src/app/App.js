@@ -4,7 +4,6 @@ import "./App.css";
 
 // import dependencies
 import React, { Component } from "react";
-import axios from "axios";
 import styled from "styled-components";
 import { Routes, Route } from "react-router-dom";
 
@@ -16,24 +15,6 @@ import Details from "../components/library/details/Details";
 import Footer from "../components/container/Footer";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-    };
-  }
-
-  // Call the API after App component is rendered
-  componentDidMount = async () => {
-    const dataSource = "https://data.nicolasneeser.ch/netflix_data_all.json";
-
-    let data = (await axios.get(dataSource)).data;
-    // Slice the set to reduce data
-    data = data.slice(0, 500);
-    // Assign to state variable 'data'
-    this.setState({ data: data });
-  };
-
   render() {
     return (
       <>
@@ -41,15 +22,9 @@ class App extends Component {
           <Header />
           <Navbar />
           <Routes>
-            <Route
-              path="/"
-              element={<Library netflixLibrary={this.state.data} />}
-            />
+            <Route path="/" element={<Library />} />
             <Route path="/stats" element={<Stats />} />
-            <Route
-              path="/details/:show_id"
-              element={<Details netflixLibrary={this.state.data} />}
-            />
+            <Route path="/details/:showId" element={<Details />} />
           </Routes>
         </StyledApp>
         <Footer />
