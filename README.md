@@ -10,7 +10,7 @@ https://www.kaggle.com/shivamb/netflix-shows
 Install and run the project with npm
 
 ```bash
-  cd ../fhgr-webp
+  cd ../fhgr_webp
   npm install
   npm start
 
