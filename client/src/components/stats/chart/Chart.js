@@ -31,8 +31,7 @@ const dataShows = [
 ];
 
 export default function ShowChart({ activeChartFilter }) {
-  let data;
-  activeChartFilter === "movies" ? (data = dataMovies) : (data = dataShows);
+  const data = activeChartFilter === "movies" ? dataMovies : dataShows;
 
   if (!data) return "Loading ...";
   return (
