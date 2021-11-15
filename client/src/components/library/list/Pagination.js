@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Pagination(props) {
+export default function Pagination({ page, setPage }) {
   return (
     <div>
-      <button onClick={() => props.handlePaginationUp()}>Next page</button>
+      <button onClick={() => setPage(page + 1)}>Next page</button>
     </div>
   );
 }

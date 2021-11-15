@@ -1,7 +1,7 @@
 import React from "react";
 // import styled from "styled-components";
 
-export default function SearchBar(props) {
+export default function SearchBar({ searchQuery, setSearchQuery }) {
   return (
     <>
       <input
@@ -9,8 +9,8 @@ export default function SearchBar(props) {
         type="search"
         placeholder="Search for title ..."
         aria-label="Search"
-        value={props.searchQuery}
-        onChange={props.handleSearchBarInput}
+        value={searchQuery}
+        onChange={setSearchQuery}
       />
       {/* <SearchButton
         className="search-button"

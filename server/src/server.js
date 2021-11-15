@@ -14,14 +14,17 @@ function sliceData(data, start) {
 }
 
 // app routes
-app.get("/api/", (req, res) => {
+app.get("/api/unfiltered", (req, res) => {
   const { page } = req.query;
-  let dataToSend = netflixLibrary;
+  let responseData = netflixLibrary;
+  const itemCounter = responseData.length;
   if (page) {
-    dataToSend = sliceData(netflixLibrary, page);
+    responseData = sliceData(netflixLibrary, page);
   }
 
-  res.send(dataToSend);
+  responseData = [itemCounter, responseData];
+
+  res.send(responseData);
 });
 
 app.get("/api/find/", (req, res) => {
@@ -36,15 +39,33 @@ app.get("/api/filter/", (req, res) => {
   const { type, genre, page } = req.query;
   let responseData;
 
-  if (type || genre) {
+  if (genre && !type) {
     responseData = netflixLibrary.filter((netflixTitle) =>
       netflixTitle.listed_in.toLowerCase().includes(genre.toLowerCase())
     );
   }
 
+  if (type && !genre) {
+    responseData = netflixLibrary.filter(
+      (netflixTitle) => netflixTitle.type.toLowerCase() === type.toLowerCase()
+    );
+  }
+
+  if (type && genre) {
+    responseData = netflixLibrary.filter(
+      (netflixTitle) =>
+        netflixTitle.type.toLowerCase() === type.toLowerCase() &&
+        netflixTitle.listed_in.toLowerCase().includes(genre.toLowerCase())
+    );
+  }
+
+  const itemCounter = responseData.length;
+
   if (page) {
     responseData = sliceData(responseData, page);
   }
+
+  responseData = [itemCounter, responseData];
 
   res.send(responseData);
 });
@@ -66,7 +87,7 @@ app.get("/api/search/", (req, res) => {
     responseData = sliceData(responseData, page);
   }
 
-  res.send(page);
+  res.send(responseData);
 });
 
 // start server

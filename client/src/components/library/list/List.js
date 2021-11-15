@@ -8,61 +8,21 @@ export default function List({
   activeType,
   selectedGenre,
   searchQuery,
+  itemCounter,
 }) {
   // State Hooks
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Use useMemo to return memoized value (performance booster)
-  // Value is only recalculated when one value in dependencies array has changed
-  const netflixLibraryFiltered = useMemo(() => {
-    if (!netflixLibrary) return [];
-    if (netflixLibrary) {
-      setIsLoading(false);
-
-      // Do this when type and genre filters are active
-      if (selectedGenre != null && activeType != null) {
-        return netflixLibrary.filter(
-          (netflixTitle) =>
-            netflixTitle.type === activeType &&
-            netflixTitle.listed_in.includes(selectedGenre["value"])
-        );
-      }
-      // Do this when only genre filter is active
-      if (selectedGenre != null) {
-        return netflixLibrary.filter((netflixTitle) =>
-          netflixTitle.listed_in.includes(selectedGenre["value"])
-        );
-      }
-      // Do this when only type filter is active
-      if (activeType != null) {
-        return netflixLibrary.filter(
-          (netflixTitle) => netflixTitle.type === activeType
-        );
-      }
-      return netflixLibrary;
-    }
-  }, [activeType, selectedGenre, netflixLibrary]);
-
-  const netflixLibraryFilteredAndSearched = useMemo(() => {
-    if (!searchQuery) return netflixLibraryFiltered;
-    // Filter list using searchQuery
-    return netflixLibraryFiltered.filter((netflixTitle) =>
-      netflixTitle.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [searchQuery, netflixLibraryFiltered]);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <section className="mainSection">
       {isLoading ? <LoadingSpinner /> : ""}
       {/* First, check if filtered list is ready */}
-      {netflixLibraryFilteredAndSearched ? (
+      {netflixLibrary ? (
         // Then check if list has entries
         // If yes, generate list. If no, show message
-        netflixLibraryFilteredAndSearched.length !== 0 ? (
+        netflixLibrary.length !== 0 ? (
           <>
-            <div className="lead mt-3">
-              #Items: {netflixLibraryFilteredAndSearched.length}
-            </div>
+            <div className="lead mt-3">#Items: {itemCounter}</div>
             <StyledTable className="table table-sm mt-5">
               <thead>
                 <tr>
@@ -74,7 +34,7 @@ export default function List({
               </thead>
               <tbody>
                 {/* Loop the filtered list and show elements in table */}
-                {netflixLibraryFilteredAndSearched.map((netflixElement) => (
+                {netflixLibrary.map((netflixElement) => (
                   <tr key={netflixElement.show_id}>
                     <td>{netflixElement.type}</td>
                     <td>{netflixElement.title}</td>

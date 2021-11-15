@@ -1,7 +1,7 @@
 import React from "react";
 import Select from "react-select";
 
-export default function GenreSelector(props) {
+export default function GenreSelector({ setSelectedGenre }) {
   // Available options to select
   const options = [
     { value: "Documentaries", label: "Documentaries" },
@@ -16,7 +16,7 @@ export default function GenreSelector(props) {
       placeholder="Select genre ..."
       className="mt-3 w-50 text-dark"
       options={options}
-      onChange={props.handleSelectedGenre}
+      onChange={setSelectedGenre}
       isClearable={true}
       clearValue={null} // When select is empty, then value = null
     />

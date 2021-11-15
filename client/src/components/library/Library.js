@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Filter from "./filter/Filter";
 import SearchBar from "./filter/SearchBar";
 import GenreSelector from "./filter/Select";
@@ -6,82 +6,69 @@ import List from "./list/List";
 import Pagination from "./list/Pagination";
 import axios from "axios";
 
-export class Library extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-      activeType: null,
-      selectedGenre: null,
-      searchQuery: null,
-      page: 1,
-    };
-  }
+export default function Library() {
+  const [data, setData] = useState([]);
+  const [activeType, setActiveType] = useState();
+  const [selectedGenre, setSelectedGenre] = useState();
+  const [searchQuery, setSearchQuery] = useState();
+  const [page, setPage] = useState(1);
+  const [itemCounter, setItemCounter] = useState(0);
 
-  componentDidMount = async () => {
-    let data = (await axios.get(`/api?page=${this.state.page}`)).data;
-    this.setState({ data: data });
-  };
+  useEffect(() => {
+    async function requestData() {
+      let data;
+      if (selectedGenre && activeType) {
+        data = (
+          await axios.get(
+            `/api/filter?genre=${selectedGenre.value}&type=${activeType}&page=${page}`
+          )
+        ).data;
+      }
+      if (selectedGenre && !activeType) {
+        data = (
+          await axios.get(
+            `/api/filter?genre=${selectedGenre.value}&page=${page}`
+          )
+        ).data;
+      }
+      if (!selectedGenre && activeType) {
+        data = (await axios.get(`/api/filter?type=${activeType}&page=${page}`))
+          .data;
+      }
+      if (!activeType && !selectedGenre) {
+        data = (await axios.get(`/api/unfiltered?page=${page}`)).data;
+      }
 
-  componentDidUpdate = async () => {
-    let data = (await axios.get(`/api?page=${this.state.page}`)).data;
-    this.setState({ data: data });
-  };
+      setData(data[1]);
+      setItemCounter(data[0]);
+    }
+    requestData();
+  }, [page, selectedGenre, activeType]);
 
-  // Handle state 'activeType' (All/Movie/TV Show)
-  setActiveType = (type) => {
-    this.setState({ activeType: type });
-  };
-
-  // Handle state 'selectedGenre' ('null' by default)
-  handleSelectedGenre = (selectedGenre) => {
-    this.setState({ selectedGenre: selectedGenre });
-  };
-
-  // Handle input in search bar
-  handleSearchBarInput = (searchQuery) => {
-    this.setState({ searchQuery: searchQuery.target.value });
-  };
-
-  handlePaginationUp = (page) => {
-    this.setState({ page: (this.state.page += 1) });
-  };
-
-  render() {
-    return (
-      <>
-        <div className="row">
-          <div className="col-sm-6">
-            <Filter
-              setActiveType={this.setActiveType}
-              activeType={this.state.activeType}
-            />
-            <GenreSelector
-              selectedGenre={this.state.selectedGenre}
-              handleSelectedGenre={this.handleSelectedGenre}
-            />
-          </div>
-
-          <div className="col-sm-6">
-            <SearchBar
-              value={this.state.searchQuery}
-              handleSearchBarInput={this.handleSearchBarInput}
-              handleSearchBarSubmit={this.handleSearchBarSubmit}
-            />
-          </div>
+  return (
+    <>
+      <div className="row">
+        <div className="col-sm-6">
+          <Filter setActiveType={setActiveType} activeType={activeType} />
+          <GenreSelector
+            selectedGenre={selectedGenre}
+            setSelectedGenre={setSelectedGenre}
+          />
         </div>
 
-        <List
-          netflixLibrary={this.state.data}
-          activeType={this.state.activeType}
-          selectedGenre={this.state.selectedGenre}
-          searchQuery={this.state.searchQuery}
-          isLoading={this.state.isLoading}
-        />
-        <Pagination handlePaginationUp={this.handlePaginationUp} />
-      </>
-    );
-  }
-}
+        <div className="col-sm-6">
+          <SearchBar value={searchQuery} setSearchQuery={setSearchQuery} />
+        </div>
+      </div>
 
-export default Library;
+      <List
+        netflixLibrary={data}
+        itemCounter={itemCounter}
+        activeType={activeType}
+        selectedGenre={selectedGenre}
+        searchQuery={searchQuery}
+      />
+      <Pagination page={page} setPage={setPage} />
+    </>
+  );
+}
