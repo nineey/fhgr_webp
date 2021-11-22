@@ -7,7 +7,7 @@ import Loader from "react-loader-spinner";
 export default function LoadingSpinner() {
   return (
     <Loader
-      className="mt-3"
+      className="m-5"
       type="TailSpin"
       color="#ffffff"
       height={50}

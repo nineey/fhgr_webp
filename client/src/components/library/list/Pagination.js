@@ -1,9 +1,15 @@
 import React from "react";
 
-export default function Pagination({ page, setPage }) {
+export default function Pagination({ page, setPage, maxPages }) {
   return (
-    <div>
+    <>
+      <button onClick={() => setPage(page - 1)}>Previous page</button>
+
       <button onClick={() => setPage(page + 1)}>Next page</button>
-    </div>
+
+      <p>
+        Page {page} of {maxPages}
+      </p>
+    </>
   );
 }

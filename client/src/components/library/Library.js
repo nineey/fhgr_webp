@@ -12,38 +12,47 @@ export default function Library() {
   const [selectedGenre, setSelectedGenre] = useState();
   const [searchQuery, setSearchQuery] = useState();
   const [page, setPage] = useState(1);
+  const [maxPages, setMaxPages] = useState(1);
   const [itemCounter, setItemCounter] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function requestData() {
       let data;
-      if (selectedGenre && activeType) {
-        data = (
-          await axios.get(
-            `/api/filter?genre=${selectedGenre.value}&type=${activeType}&page=${page}`
-          )
-        ).data;
-      }
-      if (selectedGenre && !activeType) {
-        data = (
-          await axios.get(
-            `/api/filter?genre=${selectedGenre.value}&page=${page}`
-          )
-        ).data;
-      }
-      if (!selectedGenre && activeType) {
-        data = (await axios.get(`/api/filter?type=${activeType}&page=${page}`))
-          .data;
-      }
-      if (!activeType && !selectedGenre) {
+      const genre = selectedGenre ? selectedGenre.value : null;
+      const type = activeType ? activeType : null;
+
+      if (!genre && !type) {
         data = (await axios.get(`/api/unfiltered?page=${page}`)).data;
+      }
+
+      if (genre && type) {
+        data = (
+          await axios.get(
+            `/api/filter?&type=${type}&genre=${genre}&page=${page}`
+          )
+        ).data;
+      }
+
+      if (!genre && type) {
+        data = (await axios.get(`/api/filter?&type=${type}&page=${page}`)).data;
+      }
+
+      if (genre && !type) {
+        data = (await axios.get(`/api/filter?&genre=${genre}&page=${page}`))
+          .data;
       }
 
       setData(data[1]);
       setItemCounter(data[0]);
+      setMaxPages(Math.ceil(data[0] / 10));
+
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     }
     requestData();
-  }, [page, selectedGenre, activeType]);
+  }, [page, selectedGenre, activeType, searchQuery]);
 
   return (
     <>
@@ -67,8 +76,13 @@ export default function Library() {
         activeType={activeType}
         selectedGenre={selectedGenre}
         searchQuery={searchQuery}
+        isLoading={isLoading}
       />
-      <Pagination page={page} setPage={setPage} />
+      {itemCounter !== 0 ? (
+        <Pagination page={page} setPage={setPage} maxPages={maxPages} />
+      ) : (
+        ""
+      )}
     </>
   );
 }

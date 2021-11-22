@@ -37,7 +37,7 @@ app.get("/api/find/", (req, res) => {
 
 app.get("/api/filter/", (req, res) => {
   const { type, genre, page } = req.query;
-  let responseData;
+  let responseData = netflixLibrary;
 
   if (genre && !type) {
     responseData = netflixLibrary.filter((netflixTitle) =>
@@ -83,9 +83,13 @@ app.get("/api/search/", (req, res) => {
     );
   }
 
+  const itemCounter = responseData.length;
+
   if (page) {
     responseData = sliceData(responseData, page);
   }
+
+  responseData = [itemCounter, responseData];
 
   res.send(responseData);
 });
