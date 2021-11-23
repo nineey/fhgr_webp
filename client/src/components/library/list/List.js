@@ -3,7 +3,7 @@ import LoadingSpinner from "./LoadingSpinner";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export default function List({ netflixLibrary, itemCounter, isLoading }) {
+export default function List({ currentData, itemCounter, isLoading }) {
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -26,7 +26,7 @@ export default function List({ netflixLibrary, itemCounter, isLoading }) {
         </thead>
         <tbody>
           {/* Loop the filtered list and show elements in table */}
-          {netflixLibrary.map((netflixElement) => (
+          {currentData.map((netflixElement) => (
             <tr key={netflixElement.show_id}>
               <td>{netflixElement.type}</td>
               <td>{netflixElement.title}</td>

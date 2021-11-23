@@ -7,7 +7,7 @@ const netflixLibrary = require("./netflixData.json");
 
 // slice data for pagination
 function sliceData(data, start) {
-  const startIndex = (parseInt(start) - 1) * 5;
+  const startIndex = (parseInt(start) - 1) * 10;
   const endIndex = startIndex + 10;
 
   return data.slice(startIndex, endIndex);
@@ -92,6 +92,78 @@ app.get("/api/search/", (req, res) => {
   responseData = [itemCounter, responseData];
 
   res.send(responseData);
+});
+
+app.get("/api/stats/", (req, res) => {
+  const { byType } = req.query;
+  let countByYear = { 2016: 0, 2017: 0, 2018: 0, 2019: 0, 2020: 0, 2021: 0 };
+
+  if (byType) {
+    netflixLibrary.forEach((element) => {
+      const date = element.date_added;
+      const type = element.type.toLowerCase();
+      if (date.includes("2021") && type === byType.toLowerCase()) {
+        countByYear[2021] += 1;
+      } else if (date.includes("2020") && type === byType.toLowerCase()) {
+        countByYear[2020] += 1;
+      } else if (date.includes("2019") && type === byType.toLowerCase()) {
+        countByYear[2019] += 1;
+      } else if (date.includes("2018") && type === byType.toLowerCase()) {
+        countByYear[2018] += 1;
+      } else if (date.includes("2017") && type === byType.toLowerCase()) {
+        countByYear[2017] += 1;
+      } else if (date.includes("2016") && type === byType.toLowerCase()) {
+        countByYear[2016] += 1;
+      } else {
+      }
+    });
+  }
+
+  if (!byType) {
+    netflixLibrary.forEach((element) => {
+      const date = element.date_added;
+      if (date.includes("2021")) {
+        countByYear[2021] += 1;
+      } else if (date.includes("2020")) {
+        countByYear[2020] += 1;
+      } else if (date.includes("2019")) {
+        countByYear[2019] += 1;
+      } else if (date.includes("2018")) {
+        countByYear[2018] += 1;
+      } else if (date.includes("2017")) {
+        countByYear[2017] += 1;
+      } else if (date.includes("2016")) {
+        countByYear[2016] += 1;
+      } else {
+      }
+    });
+  }
+
+  const reponseData = {
+    2016: countByYear[2016],
+    2017: countByYear[2016] + countByYear[2017],
+    2018: countByYear[2016] + countByYear[2017] + countByYear[2018],
+    2019:
+      countByYear[2016] +
+      countByYear[2017] +
+      countByYear[2018] +
+      countByYear[2019],
+    2020:
+      countByYear[2016] +
+      countByYear[2017] +
+      countByYear[2018] +
+      countByYear[2019] +
+      countByYear[2020],
+    2021:
+      countByYear[2016] +
+      countByYear[2017] +
+      countByYear[2018] +
+      countByYear[2019] +
+      countByYear[2020] +
+      countByYear[2021],
+  };
+
+  res.send(reponseData);
 });
 
 // start server

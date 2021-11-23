@@ -2,23 +2,17 @@ import React from "react";
 // import styled from "styled-components";
 
 export default function SearchBar({ searchQuery, setSearchQuery }) {
+  console.log(searchQuery);
   return (
     <>
       <input
         className="form-control w-50"
         type="search"
         placeholder="Search for title ..."
-        aria-label="Search"
         value={searchQuery}
-        onChange={setSearchQuery}
+        onChange={() => setSearchQuery()}
       />
-      {/* <SearchButton
-        className="search-button"
-        type="submit"
-        onClick={props.handleSearchBarSubmit}
-      >
-        Search
-      </SearchButton> */}
+      {/* <button type="submit">Search</button> */}
     </>
   );
 }
