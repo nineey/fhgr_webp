@@ -10,7 +10,7 @@ export default function Library() {
   const [data, setData] = useState([]);
   const [activeType, setActiveType] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
-  const [searchQuery, setSearchQuery] = useState();
+  const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const [maxPages, setMaxPages] = useState(1);
   const [itemCounter, setItemCounter] = useState(0);
@@ -20,11 +20,12 @@ export default function Library() {
   const requestData = useCallback(async () => {
     const genre = selectedGenre ? selectedGenre.value : null;
     const type = activeType ? activeType : null;
+    const search = searchQuery ? searchQuery : null;
 
     // use axios to load data from API
     const data = (
       await axios.get(`/api/filter`, {
-        params: { type, genre, page },
+        params: { type, genre, search, page },
       })
     ).data;
 
@@ -39,8 +40,8 @@ export default function Library() {
     // added some timeout to see the loading spinner spinning :)
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
-  }, [page, selectedGenre, activeType]);
+    }, 1500);
+  }, [page, selectedGenre, activeType, searchQuery]);
 
   // reset page to 1 whenever number of items in the list changes
   useEffect(() => {

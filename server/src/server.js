@@ -3,7 +3,10 @@ import express from "express";
 const app = express();
 const PORT = 8000;
 
+// read full data set into server memory
 const netflixLibrary = require("./netflixData.json");
+
+/*********** HELPER FUNCTIONS ************/
 
 // slice data for pagination
 function sliceData(data, start) {
@@ -13,7 +16,8 @@ function sliceData(data, start) {
   return data.slice(startIndex, endIndex);
 }
 
-// app routes
+/*********** ALL DATA ************/
+
 app.get("/api/unfiltered", (req, res) => {
   const { page } = req.query;
   let responseData = netflixLibrary;
@@ -27,6 +31,8 @@ app.get("/api/unfiltered", (req, res) => {
   res.send(responseData);
 });
 
+/*********** FIND A SINGLE OBJECT BY ID ************/
+
 app.get("/api/find/", (req, res) => {
   const { showId } = req.query;
   let responseData = netflixLibrary.find(
@@ -35,64 +41,59 @@ app.get("/api/find/", (req, res) => {
   res.send(responseData);
 });
 
-app.get("/api/filter/", (req, res) => {
-  const { type, genre, page } = req.query;
-  let responseData = netflixLibrary;
+/*********** FILTERS & SEARCH ************/
 
+app.get("/api/filter/", (req, res) => {
+  const { type, genre, search, page } = req.query;
+  let filteredData = netflixLibrary;
+  let filteredAndSearchedData;
+
+  // filter for genre and type first
   if (genre && !type) {
-    responseData = netflixLibrary.filter((netflixTitle) =>
+    filteredData = netflixLibrary.filter((netflixTitle) =>
       netflixTitle.listed_in.toLowerCase().includes(genre.toLowerCase())
     );
   }
 
   if (type && !genre) {
-    responseData = netflixLibrary.filter(
+    filteredData = netflixLibrary.filter(
       (netflixTitle) => netflixTitle.type.toLowerCase() === type.toLowerCase()
     );
   }
 
   if (type && genre) {
-    responseData = netflixLibrary.filter(
+    filteredData = netflixLibrary.filter(
       (netflixTitle) =>
         netflixTitle.type.toLowerCase() === type.toLowerCase() &&
         netflixTitle.listed_in.toLowerCase().includes(genre.toLowerCase())
     );
   }
 
-  const itemCounter = responseData.length;
+  // next filter again with searchQuery
+  search
+    ? (filteredAndSearchedData = filteredData.filter((netflixTitle) =>
+        netflixTitle.title
+          .toString()
+          .toLowerCase()
+          .includes(search.toString().toLowerCase())
+      ))
+    : (filteredAndSearchedData = filteredData);
 
+  // count the number of items in the filtered list
+  const itemCounter = filteredAndSearchedData.length;
+
+  // slice the filtered list for pagination
   if (page) {
-    responseData = sliceData(responseData, page);
+    filteredAndSearchedData = sliceData(filteredAndSearchedData, page);
   }
 
-  responseData = [itemCounter, responseData];
+  // prepare an array which is used as response || index 0 = #items / index 1 = filtered list
+  const responseData = [itemCounter, filteredAndSearchedData];
 
   res.send(responseData);
 });
 
-app.get("/api/search/", (req, res) => {
-  const { query, page } = req.query;
-  let responseData;
-
-  if (query) {
-    responseData = netflixLibrary.filter((element) =>
-      element.title
-        .toString()
-        .toLowerCase()
-        .includes(query.toString().toLowerCase())
-    );
-  }
-
-  const itemCounter = responseData.length;
-
-  if (page) {
-    responseData = sliceData(responseData, page);
-  }
-
-  responseData = [itemCounter, responseData];
-
-  res.send(responseData);
-});
+/*********** STATS ************/
 
 app.get("/api/stats/", (req, res) => {
   const { byType } = req.query;

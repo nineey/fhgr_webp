@@ -2,7 +2,6 @@ import React from "react";
 // import styled from "styled-components";
 
 export default function SearchBar({ searchQuery, setSearchQuery }) {
-  console.log(searchQuery);
   return (
     <>
       <input
@@ -10,17 +9,8 @@ export default function SearchBar({ searchQuery, setSearchQuery }) {
         type="search"
         placeholder="Search for title ..."
         value={searchQuery}
-        onChange={() => setSearchQuery()}
+        onChange={(e) => setSearchQuery(e.target.value)}
       />
-      {/* <button type="submit">Search</button> */}
     </>
   );
 }
-
-// const SearchButton = styled.button`
-//   background-color: var(--primary-color);
-//   border-radius: 4px;
-//   text-decoration: none;
-//   color: var(--secondary-color);
-//   border: 2px solid var(--secondary-color);
-// `;

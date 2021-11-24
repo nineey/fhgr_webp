@@ -7,7 +7,9 @@ export default function Footer() {
       <StyledFooter>
         <footer>
           <div className="container pt-3">
-            <p>Handcrafted by DBM students @FHGR</p>
+            <p>
+              Handcrafted by DBM students @FHGR | Powered by React and Express
+            </p>
           </div>
         </footer>
       </StyledFooter>
