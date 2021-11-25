@@ -1,7 +1,7 @@
 import React from "react";
 // import styled from "styled-components";
 
-export default function SearchBar({ searchQuery, setSearchQuery }) {
+export default function SearchBar({ searchQuery, setSearchQuery, setPage }) {
   return (
     <>
       <input
@@ -9,7 +9,10 @@ export default function SearchBar({ searchQuery, setSearchQuery }) {
         type="search"
         placeholder="Search for title ..."
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        onChange={(e) => {
+          setSearchQuery(e.target.value);
+          setPage(1);
+        }}
       />
     </>
   );

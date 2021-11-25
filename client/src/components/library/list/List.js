@@ -2,6 +2,7 @@ import React from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { InfoCircle } from "react-bootstrap-icons";
 
 export default function List({ currentData, itemCounter, isLoading }) {
   if (isLoading) {
@@ -33,7 +34,11 @@ export default function List({ currentData, itemCounter, isLoading }) {
               <td>{netflixElement.listed_in}</td>
               <td>
                 {/* Link to particular detail page */}
-                <Link to={`details/${netflixElement.show_id}`}>More</Link>
+                <Link to={`details/${netflixElement.show_id}`}>
+                  <StyledInfoIcon>
+                    <InfoCircle />
+                  </StyledInfoIcon>
+                </Link>
               </td>
             </tr>
           ))}
@@ -45,4 +50,9 @@ export default function List({ currentData, itemCounter, isLoading }) {
 
 const StyledTable = styled.table`
   color: var(--secondary-color);
+`;
+
+const StyledInfoIcon = styled.div`
+  font-size: 1.3em;
+  margin-top: -5px;
 `;

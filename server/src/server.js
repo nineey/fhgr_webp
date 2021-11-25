@@ -69,7 +69,7 @@ app.get("/api/filter/", (req, res) => {
     );
   }
 
-  // next filter again with searchQuery
+  // further, filter again with searchQuery
   search
     ? (filteredAndSearchedData = filteredData.filter((netflixTitle) =>
         netflixTitle.title

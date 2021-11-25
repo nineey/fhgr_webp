@@ -22,11 +22,9 @@ export default function Library() {
     const type = activeType ? activeType : null;
     const search = searchQuery ? searchQuery : null;
 
-    // use axios to load data from API
+    // use axios to get data from API when any filter changes
     const data = (
-      await axios.get(`/api/filter`, {
-        params: { type, genre, search, page },
-      })
+      await axios.get(`/api/filter`, { params: { type, genre, search, page } })
     ).data;
 
     // response is an array of [itemCounter, [actual data]]
@@ -41,12 +39,13 @@ export default function Library() {
     setTimeout(() => {
       setIsLoading(false);
     }, 1500);
+    console.log(page);
   }, [page, selectedGenre, activeType, searchQuery]);
 
   // reset page to 1 whenever number of items in the list changes
-  useEffect(() => {
-    setPage(1);
-  }, [itemCounter]);
+  // useEffect(() => {
+  //   setPage(1);
+  // }, [itemCounter]);
 
   // get data on page refresh and when filter changes
   useEffect(() => {
@@ -57,10 +56,15 @@ export default function Library() {
     <>
       <div className="row">
         <div className="col-sm-6">
-          <Filter setActiveType={setActiveType} activeType={activeType} />
+          <Filter
+            setActiveType={setActiveType}
+            activeType={activeType}
+            setPage={setPage}
+          />
           <GenreSelector
             selectedGenre={selectedGenre}
             setSelectedGenre={setSelectedGenre}
+            setPage={setPage}
           />
         </div>
 
@@ -68,6 +72,7 @@ export default function Library() {
           <SearchBar
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
+            setPage={setPage}
           />
         </div>
       </div>

@@ -14,12 +14,12 @@ import {
 
 export default function ShowChart({ activeChartFilter, statsData }) {
   const data = [
-    { name: "2016", data: statsData[2016] },
-    { name: "2017", data: statsData[2017] },
-    { name: "2018", data: statsData[2018] },
-    { name: "2019", data: statsData[2019] },
-    { name: "2020", data: statsData[2020] },
-    { name: "2021", data: statsData[2021] },
+    { name: "2016", Movies: statsData[2016], TVShows: statsData[2016] },
+    { name: "2017", Movies: statsData[2017], TVShows: statsData[2016] },
+    { name: "2018", Movies: statsData[2018], TVShows: statsData[2016] },
+    { name: "2019", Movies: statsData[2019], TVShows: statsData[2016] },
+    { name: "2020", Movies: statsData[2020], TVShows: statsData[2016] },
+    { name: "2021", Movies: statsData[2021], TVShows: statsData[2016] },
   ];
 
   if (!data) return "Loading ...";
@@ -41,7 +41,8 @@ export default function ShowChart({ activeChartFilter, statsData }) {
           <XAxis dataKey="name" />
           <YAxis />
           <Legend />
-          <Bar dataKey="data" fill="#ffffff" />
+          <Bar dataKey="Movies" stackId="a" fill="#ffffff" />
+          {/* <Bar dataKey="TVShows" stackId="b" fill="#519E34" /> */}
         </BarChart>
       </ResponsiveContainer>
     </>

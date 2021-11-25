@@ -5,7 +5,7 @@ export default function Header() {
     <div className="app-header mt-5">
       <div>
         <h1>
-          FilmUp
+          FilmUp!
           <br />
         </h1>
         <h2>The Ultimate Netflix Library &#38; Stats</h2>

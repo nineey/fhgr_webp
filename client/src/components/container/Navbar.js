@@ -11,7 +11,7 @@ export default function Navbar() {
   const { pathname } = location;
 
   // Handle different views for active navlinks
-  const nav1 = pathname === "/" ? "> Full Library" : "Full Library";
+  const nav1 = pathname === "/" ? "> Library" : "Library";
   const nav2 = pathname === "/stats" ? "> Stats" : "Stats";
   const navBack = "< Back";
 
