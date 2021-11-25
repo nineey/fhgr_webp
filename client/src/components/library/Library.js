@@ -22,9 +22,9 @@ export default function Library() {
     const type = activeType ? activeType : null;
     const search = searchQuery ? searchQuery : null;
 
-    // use axios to get data from API when any filter changes
+    // use axios to get data from API
     const data = (
-      await axios.get(`/api/filter`, { params: { type, genre, search, page } })
+      await axios.get("/api/filter", { params: { type, genre, search, page } })
     ).data;
 
     // response is an array of [itemCounter, [actual data]]
@@ -39,15 +39,9 @@ export default function Library() {
     setTimeout(() => {
       setIsLoading(false);
     }, 1500);
-    console.log(page);
   }, [page, selectedGenre, activeType, searchQuery]);
 
-  // reset page to 1 whenever number of items in the list changes
-  // useEffect(() => {
-  //   setPage(1);
-  // }, [itemCounter]);
-
-  // get data on page refresh and when filter changes
+  // get data on page load or when user sets new filter
   useEffect(() => {
     requestData();
   }, [requestData]);
