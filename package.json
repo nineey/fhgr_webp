@@ -1,0 +1,21 @@
+{
+  "name": "fhgr_webp",
+  "version": "1.0.0",
+  "description": "Building a UI for this Netflix data set: https://www.kaggle.com/shivamb/netflix-shows",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm start --prefix server",
+    "heroku-postbuild": "npm install --prefix server && npm install --prefix client && npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nineey/fhgr_webp.git"
+  },
+  "author": "diesdasananas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nineey/fhgr_webp/issues"
+  },
+  "homepage": "https://github.com/nineey/fhgr_webp#readme"
+}

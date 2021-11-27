@@ -1,7 +1,9 @@
-import express from "express";
+// import express from "express";
+
+const express = require("express");
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 // read full data set into server memory
 const netflixLibrary = require("./netflixData.json");
@@ -166,6 +168,19 @@ app.get("/api/stats/", (req, res) => {
 
   res.send(reponseData);
 });
+
+// serve frontend in production and trust proxy
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("../client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(
+      path.resolve(__dirname, "..", "client", "build", "index.html")
+    );
+  });
+
+  app.enable("trust proxy");
+}
 
 // start server
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
