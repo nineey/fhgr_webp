@@ -12,7 +12,7 @@ export default function Stats() {
   const getStats = useCallback(async () => {
     const statsData = (
       await axios.get(`/api/stats`, {
-        params: { byType: activeChartFilter },
+        params: { type: activeChartFilter },
       })
     ).data;
     setStatsData(statsData);

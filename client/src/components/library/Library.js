@@ -35,7 +35,7 @@ export default function Library() {
     // calculate maximal number of pages (used for pagination)
     setMaxPages(Math.ceil(data[0] / 10));
 
-    // added some timeout to see the loading spinner spinning :)
+    // added some timeout to see the loading spinner actually spinning :)
     setTimeout(() => {
       setIsLoading(false);
     }, 1500);

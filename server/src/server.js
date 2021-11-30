@@ -1,5 +1,3 @@
-// import express from "express";
-
 const express = require("express");
 
 const app = express();
@@ -40,6 +38,27 @@ app.get("/api/find/", (req, res) => {
   let responseData = netflixLibrary.find(
     (element) => element.show_id === showId
   );
+  res.send(responseData);
+});
+
+/*********** GET ALL GENRES **************/
+
+app.get("/api/get/genres", (req, res) => {
+  let genreUnformatted = [];
+  let genreSplitted = [];
+  let genreSplittedAll = [];
+
+  netflixLibrary.map((e) => genreUnformatted.push(e.listed_in));
+
+  genreUnformatted.map((e) => {
+    const singleGenre = e.split(", ");
+    return genreSplitted.push(singleGenre);
+  });
+
+  genreSplitted.map((e) => genreSplittedAll.push(...e));
+
+  // delete duplicates: https://dev.to/soyleninjs/3-ways-to-remove-duplicates-in-an-array-in-javascript-259o
+  const responseData = [...new Set(genreSplittedAll)].sort();
   res.send(responseData);
 });
 
@@ -98,79 +117,35 @@ app.get("/api/filter/", (req, res) => {
 /*********** STATS ************/
 
 app.get("/api/stats/", (req, res) => {
-  const { byType } = req.query;
-  let countByYear = { 2016: 0, 2017: 0, 2018: 0, 2019: 0, 2020: 0, 2021: 0 };
+  const { type } = req.query;
+  let filteredData = netflixLibrary;
 
-  if (byType) {
-    netflixLibrary.forEach((element) => {
-      const date = element.date_added;
-      const type = element.type.toLowerCase();
-      if (date.includes("2021") && type === byType.toLowerCase()) {
-        countByYear[2021] += 1;
-      } else if (date.includes("2020") && type === byType.toLowerCase()) {
-        countByYear[2020] += 1;
-      } else if (date.includes("2019") && type === byType.toLowerCase()) {
-        countByYear[2019] += 1;
-      } else if (date.includes("2018") && type === byType.toLowerCase()) {
-        countByYear[2018] += 1;
-      } else if (date.includes("2017") && type === byType.toLowerCase()) {
-        countByYear[2017] += 1;
-      } else if (date.includes("2016") && type === byType.toLowerCase()) {
-        countByYear[2016] += 1;
-      } else {
-      }
-    });
+  if (type) {
+    filteredData = netflixLibrary.filter(
+      (netflixTitle) => netflixTitle.type.toLowerCase() === type.toLowerCase()
+    );
   }
 
-  if (!byType) {
-    netflixLibrary.forEach((element) => {
-      const date = element.date_added;
-      if (date.includes("2021")) {
-        countByYear[2021] += 1;
-      } else if (date.includes("2020")) {
-        countByYear[2020] += 1;
-      } else if (date.includes("2019")) {
-        countByYear[2019] += 1;
-      } else if (date.includes("2018")) {
-        countByYear[2018] += 1;
-      } else if (date.includes("2017")) {
-        countByYear[2017] += 1;
-      } else if (date.includes("2016")) {
-        countByYear[2016] += 1;
-      } else {
-      }
-    });
-  }
+  let allDates = [];
+  filteredData.map((e) => {
+    const newDate = new Date(e.date_added).getFullYear();
+    allDates.push(newDate);
+  });
 
-  const reponseData = {
-    2016: countByYear[2016],
-    2017: countByYear[2016] + countByYear[2017],
-    2018: countByYear[2016] + countByYear[2017] + countByYear[2018],
-    2019:
-      countByYear[2016] +
-      countByYear[2017] +
-      countByYear[2018] +
-      countByYear[2019],
-    2020:
-      countByYear[2016] +
-      countByYear[2017] +
-      countByYear[2018] +
-      countByYear[2019] +
-      countByYear[2020],
-    2021:
-      countByYear[2016] +
-      countByYear[2017] +
-      countByYear[2018] +
-      countByYear[2019] +
-      countByYear[2020] +
-      countByYear[2021],
-  };
-
+  // how to group an array: https://stackoverflow.com/questions/52711740/group-array-and-get-count/52711775
+  const getNumsByYear = allDates.reduce(
+    (r, c) => ((r[c] = (r[c] || 0) + 1), r),
+    {}
+  );
+  delete getNumsByYear["NaN"];
+  const reponseData = getNumsByYear;
   res.send(reponseData);
 });
 
+// tutorial: https://www.youtube.com/watch?v=71wSzpLyW9k
 // serve frontend in production and trust proxy
 if (process.env.NODE_ENV === "production") {
+  // set static folder
   app.use(express.static("../client/build"));
 
   app.get("*", (req, res) => {

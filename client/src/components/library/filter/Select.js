@@ -1,14 +1,28 @@
-import React from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 
 export default function GenreSelector({ setSelectedGenre, setPage }) {
-  // Available options to select
-  const options = [
-    { value: "Documentaries", label: "Documentaries" },
-    { value: "International TV Shows", label: "International TV Shows" },
-    { value: "TV Dramas", label: "TV Dramas" },
-    { value: "TV Mysteries", label: "TV Mysteries" },
-  ];
+  const [genres, setGenres] = useState([]);
+
+  useEffect(() => {
+    const getFullGenreList = async () => {
+      const allGenres = (await axios.get(`/api/get/genres`)).data;
+      setGenres(allGenres);
+    };
+    getFullGenreList();
+  }, []);
+
+  // prepare genre options for filter selector
+  let options = [];
+  genres.map((e) => options.push({ value: e, label: e }));
+
+  // const options = [
+  //   { value: "Documentaries", label: "Documentaries" },
+  //   { value: "International TV Shows", label: "International TV Shows" },
+  //   { value: "TV Dramas", label: "TV Dramas" },
+  //   { value: "TV Mysteries", label: "TV Mysteries" },
+  // ];
 
   // set selected genre and at the same time page = 1
   function handlePageOnChange(e) {
