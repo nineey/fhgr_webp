@@ -44,18 +44,16 @@ app.get("/api/find/", (req, res) => {
 /*********** GET ALL GENRES **************/
 
 app.get("/api/get/genres", (req, res) => {
-  let genreUnformatted = [];
-  let genreSplitted = [];
-  let genreSplittedAll = [];
-
-  netflixLibrary.map((e) => genreUnformatted.push(e.listed_in));
-
-  genreUnformatted.map((e) => {
-    const singleGenre = e.split(", ");
-    return genreSplitted.push(singleGenre);
+  const genreUnformatted = netflixLibrary.map((e) => {
+    return e.listed_in;
   });
 
-  genreSplitted.map((e) => genreSplittedAll.push(...e));
+  const genreSplitted = genreUnformatted.map((e) => {
+    return e.split(", ");
+  });
+
+  let genreSplittedAll = [];
+  genreSplitted.forEach((e) => genreSplittedAll.push(...e));
 
   // delete duplicates: https://dev.to/soyleninjs/3-ways-to-remove-duplicates-in-an-array-in-javascript-259o
   const responseData = [...new Set(genreSplittedAll)].sort();

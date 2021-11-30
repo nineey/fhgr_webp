@@ -14,8 +14,10 @@ export default function GenreSelector({ setSelectedGenre, setPage }) {
   }, []);
 
   // prepare genre options for filter selector
-  let options = [];
-  genres.map((e) => options.push({ value: e, label: e }));
+  // let options = [];
+  const options = genres.map((e) => {
+    return { value: e, label: e };
+  });
 
   // const options = [
   //   { value: "Documentaries", label: "Documentaries" },
