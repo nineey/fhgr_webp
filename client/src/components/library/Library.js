@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Filter from "./filter/Filter";
+import TypeFilter from "./filter/TypeFilter";
 import SearchBar from "./filter/SearchBar";
-import GenreSelector from "./filter/Select";
+import GenreSelector from "./filter/GenreSelector";
 import List from "./list/List";
 import ListPagination from "./list/Pagination";
 import axios from "axios";
@@ -50,7 +50,7 @@ export default function Library() {
     <>
       <div className="row">
         <div className="col-sm-6">
-          <Filter
+          <TypeFilter
             setActiveType={setActiveType}
             activeType={activeType}
             setPage={setPage}

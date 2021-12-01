@@ -11,7 +11,7 @@ Install and run the project with npm
 
 ```bash
   cd ../fhgr_webp
-  npm install
+  npm run install-dev
   npm run start-dev
 
 ```

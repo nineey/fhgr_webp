@@ -19,13 +19,6 @@ export default function GenreSelector({ setSelectedGenre, setPage }) {
     return { value: e, label: e };
   });
 
-  // const options = [
-  //   { value: "Documentaries", label: "Documentaries" },
-  //   { value: "International TV Shows", label: "International TV Shows" },
-  //   { value: "TV Dramas", label: "TV Dramas" },
-  //   { value: "TV Mysteries", label: "TV Mysteries" },
-  // ];
-
   // set selected genre and at the same time page = 1
   function handlePageOnChange(e) {
     setSelectedGenre(e);

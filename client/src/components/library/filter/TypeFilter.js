@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Filter({ activeType, setActiveType, setPage }) {
+export default function TypeFilter({ activeType, setActiveType, setPage }) {
   // Used for handling active class of a button
   const className = "btn btn-outline-light";
 
