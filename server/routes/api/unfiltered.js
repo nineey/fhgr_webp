@@ -17,20 +17,3 @@ router.get("/", (req, res) => {
 });
 
 module.exports = router;
-
-// router.get("/", (req, res) => {
-//   const { page } = req.query;
-//   let responseData = netflixLibrary;
-//   const itemCounter = responseData.length;
-//   if (page) {
-//     responseData = sliceData(netflixLibrary, page);
-//   }
-
-//   responseData = [itemCounter, responseData];
-
-//   res.send(responseData);
-// });
-
-// router.get("/", (req, res) => {
-//   res.send("User List");
-// });
