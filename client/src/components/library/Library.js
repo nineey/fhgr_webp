@@ -62,7 +62,7 @@ export default function Library() {
           />
         </div>
 
-        <div className="col-sm-6">
+        <div className="col-sm-6 mt-3 mt-md-0">
           <SearchBar
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}

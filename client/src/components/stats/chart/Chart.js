@@ -13,6 +13,8 @@ import {
 } from "recharts";
 
 export default function ShowChart({ activeChartFilter, statsData }) {
+  const currentSum = Object.values(statsData).reduce((a, b) => a + b, 0);
+
   const data = [
     { name: "2015", chartBarData: statsData[2015] },
     { name: "2016", chartBarData: statsData[2016] },
@@ -26,6 +28,15 @@ export default function ShowChart({ activeChartFilter, statsData }) {
   if (!data) return "Loading ...";
   return (
     <>
+      <div className="lead">
+        Netflix has {currentSum}{" "}
+        {activeChartFilter === "movie"
+          ? "Movies"
+          : activeChartFilter === "tv show"
+          ? "TV Shows"
+          : "Movies and TV Shows"}{" "}
+        in total
+      </div>
       <ResponsiveContainer width={"100%"} height={"100%"}>
         <BarChart
           className="chart"
@@ -40,9 +51,8 @@ export default function ShowChart({ activeChartFilter, statsData }) {
           }}
         >
           <XAxis dataKey="name" />
-          <YAxis />
+          <YAxis type="number" domain={[0, 2016]} />
           <Bar dataKey="chartBarData" stackId="a" fill="#ffffff" />
-          {/* <Bar dataKey="TVShows" stackId="b" fill="#519E34" /> */}
         </BarChart>
       </ResponsiveContainer>
     </>

@@ -6,7 +6,7 @@ import axios from "axios";
 
 export default function Stats() {
   // Hooks
-  const [activeChartFilter, setActiveChartFilter] = useState("movie");
+  const [activeChartFilter, setActiveChartFilter] = useState("");
   const [statsData, setStatsData] = useState({});
 
   const getStats = useCallback(async () => {
@@ -24,7 +24,7 @@ export default function Stats() {
 
   return (
     <>
-      <div className="row mt-5">
+      <div className="row">
         <div className="col">
           <ChartFilter
             activeChartFilter={activeChartFilter}
