@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.js",
-    "start-dev": "npx nodemon --exec npx babel-node src/server.js"
+    "start": "node server.js",
+    "start-dev": "npx nodemon --exec npx babel-node server.js"
   },
   "keywords": [],
   "author": "",
