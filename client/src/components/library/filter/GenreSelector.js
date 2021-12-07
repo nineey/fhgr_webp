@@ -13,13 +13,12 @@ export default function GenreSelector({ setSelectedGenre, setPage }) {
     getFullGenreList();
   }, []);
 
-  // prepare genre options for filter selector
-  // let options = [];
+  // Prepare genre options for filter selector
   const options = genres.map((e) => {
     return { value: e, label: e };
   });
 
-  // set selected genre and at the same time page = 1
+  // Set selected genre and at the same time page = 1
   function handlePageOnChange(e) {
     setSelectedGenre(e);
     setPage(1);

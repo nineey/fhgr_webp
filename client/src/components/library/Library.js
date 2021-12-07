@@ -16,32 +16,32 @@ export default function Library() {
   const [itemCounter, setItemCounter] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  // request data from API according to filters in front app
+  // Request data from API according to filters in front app
   const requestData = useCallback(async () => {
     const genre = selectedGenre ? selectedGenre.value : null;
     const type = activeType ? activeType : null;
     const search = searchQuery ? searchQuery : null;
 
-    // use axios to get data from API
+    // Use axios to get data from API
     const data = (
       await axios.get("/api/filter", { params: { type, genre, search, page } })
     ).data;
 
-    // response is an array of [itemCounter, [actual data]]
-    // index 0 = itemCounter
-    // index 1 = filtered data
+    // Response is an array of [itemCounter, [actual data]]
+    // Index 0 = itemCounter
+    // Index 1 = filtered data
     setData(data[1]);
     setItemCounter(data[0]);
-    // calculate maximal number of pages (used for pagination)
+    // Calculate maximal number of pages (used for pagination)
     setMaxPages(Math.ceil(data[0] / 10));
 
-    // added some timeout to see the loading spinner actually spinning :)
+    // Added some timeout to see the loading spinner actually spinning :)
     setTimeout(() => {
       setIsLoading(false);
     }, 1500);
   }, [page, selectedGenre, activeType, searchQuery]);
 
-  // get data on page load or when user sets new filter
+  // Get data on page load or when user sets new filter
   useEffect(() => {
     requestData();
   }, [requestData]);

@@ -4,6 +4,7 @@ export default function ChartFilter({
   activeChartFilter,
   setActiveChartFilter,
 }) {
+  // Handling style for active/inactive buttons
   const className = "btn btn-outline-light";
   const classNameActive = "btn btn-outline-light active";
 

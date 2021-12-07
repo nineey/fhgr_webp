@@ -8,7 +8,7 @@ export default function Details() {
   // Get the current show id from URL param
   const { showId } = useParams();
 
-  // get data from API
+  // Get data from API
   useEffect(() => {
     async function fetchData() {
       let getDetails = (await axios.get(`/api/find?showId=${showId}`)).data;

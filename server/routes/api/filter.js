@@ -29,7 +29,7 @@ router.get("/", (req, res) => {
     );
   }
 
-  // further, filter again with searchQuery
+  // filter again with searchQuery
   search
     ? (filteredAndSearchedData = filteredData.filter((netflixTitle) =>
         netflixTitle.title

@@ -5,10 +5,11 @@ import ChartFilter from "./chartFilter/ChartFilter";
 import axios from "axios";
 
 export default function Stats() {
-  // Hooks
   const [activeChartFilter, setActiveChartFilter] = useState("");
   const [statsData, setStatsData] = useState({});
 
+  // Get stats data from server
+  // Response is an object: {year: counter, year: counter, ...}
   const getStats = useCallback(async () => {
     const statsData = (
       await axios.get(`/api/stats`, {

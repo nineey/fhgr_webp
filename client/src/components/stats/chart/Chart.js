@@ -13,7 +13,11 @@ import {
 } from "recharts";
 
 export default function ShowChart({ activeChartFilter, statsData }) {
-  const currentSum = Object.values(statsData).reduce((a, b) => a + b, 0);
+  // Get total number of items in the the stats array
+  const currentSum = Object.values(statsData).reduce(
+    (sum, currentValue) => sum + currentValue,
+    0
+  );
 
   const data = [
     { name: "2015", chartBarData: statsData[2015] },
