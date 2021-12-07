@@ -5,7 +5,7 @@ https://www.kaggle.com/shivamb/netflix-shows
 
 ## Preview
 
-https://fhgr-webp.herokuapp.com/ (may load for about 20 seconds because it still runs on a free Heroku dyno)
+https://fhgr-webp.herokuapp.com/ (❗ Runs on free Heroku dyno: may load for about 20 seconds)
 
 #### Work in progress. 🔨
 
