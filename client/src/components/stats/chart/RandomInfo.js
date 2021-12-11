@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
 
 export default function RandomInfo({ activeChartFilter, statsData }) {
+  // Stats about movies / tv shows / genres
   const [totalNums, setTotalNums] = useState({});
+  const [genreStats, setGenreStats] = useState({});
 
   useEffect(() => {
     const getTotalNumsMovies = async () => {
@@ -15,33 +18,63 @@ export default function RandomInfo({ activeChartFilter, statsData }) {
       setTotalNums(data);
     };
 
-    activeChartFilter === "movie"
-      ? getTotalNumsMovies()
-      : getTotalNumsTvShows();
-    return () => console.log("cleaned up");
+    const getGenres = async () => {
+      const data = (await axios.get(`/api/stats/bygenre`)).data;
+      setGenreStats(data);
+    };
+
+    if (activeChartFilter === "") getGenres();
+    if (activeChartFilter === "movie") getTotalNumsMovies();
+    if (activeChartFilter === "tv show") getTotalNumsTvShows();
   }, [activeChartFilter]);
 
   return (
-    <>
+    <StyledContainer>
       <h3>Did you know? </h3>
       {activeChartFilter === "movie" ? (
         <>
-          <p>The library has {statsData["totalSum"]} Movies</p>
-          <p>Watching every movie would take you:</p>
-          <ol>
-            <li>{totalNums["m"]} minutes</li>
-            <li>that equals {totalNums["h"]} hours</li>
-            <li>or {totalNums["d"]} days</li>
-          </ol>
+          <div className="lead mt-5 mb-3">Watching every movie would take:</div>
+
+          <div className="lead">
+            <BigNum>{totalNums["m"]}</BigNum> minutes
+          </div>
+          <div className="lead">
+            that's <BigNum>{totalNums["h"]}</BigNum> hours
+          </div>
+          <div className="lead">
+            or <BigNum>{totalNums["d"]}</BigNum> days
+          </div>
         </>
       ) : activeChartFilter === "tv show" ? (
         <>
-          <p>The library has {statsData["totalSum"]} TV shows</p>
-          <p>Total {totalNums["seasons"]} Seasons</p>
+          <div className="lead mt-5 mb-3">All TV shows together have:</div>
+
+          <div className="lead">
+            <BigNum>{totalNums["seasons"]}</BigNum> seasons
+          </div>
         </>
       ) : (
-        <p>The library has {statsData["totalSum"]} Movies and TV shows</p>
+        <>
+          <div className="lead mt-5">
+            The library has <BigNum>{statsData["totalSum"]}</BigNum> Movies and
+            TV shows
+          </div>
+          <div className="lead">
+            from <BigNum>{genreStats["totalOfGenres"]}</BigNum> different
+            genres.
+          </div>
+        </>
       )}
-    </>
+    </StyledContainer>
   );
 }
+
+const BigNum = styled.strong`
+  font-size: 1.5em;
+  font-weight: 500;
+  margin-top: -15px;
+`;
+
+const StyledContainer = styled.div`
+  height: 16em !important;
+`;

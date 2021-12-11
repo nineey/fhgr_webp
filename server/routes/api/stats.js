@@ -57,11 +57,15 @@ router.get("/byGenre", (req, res) => {
     .flat()
     .reduce((r, c) => ((r[c] = (r[c] || 0) + 1), r), {});
 
-  const reponseData = getNumsByGenre;
+  const gerneCounter = Object.keys(getNumsByGenre);
+  const reponseData = {
+    totalOfGenres: gerneCounter.length,
+    totalByGenre: getNumsByGenre,
+  };
   res.send(reponseData);
 });
 
-/********* TOTAL MINUTES OF ALL MOVIES / TOTAL OF SEASONS *********/
+/********* TOTAL MINUTES OF ALL MOVIES *********/
 router.get("/total/duration/movies", (req, res) => {
   const getAllMovies = netflixLibrary.filter((e) => e.type === "Movie");
 

@@ -22,13 +22,12 @@ export default function Stats() {
 
   useEffect(() => {
     getStats();
-    return () => console.log("cleaned up");
   }, [getStats]);
 
   return (
     <>
       <div className="row">
-        <div className="col">
+        <div className="col-md-6">
           <TypeFilter
             activeChartFilter={activeChartFilter}
             setActiveChartFilter={setActiveChartFilter}
@@ -36,7 +35,7 @@ export default function Stats() {
         </div>
       </div>
       <div className="row mt-5">
-        <div className="col">
+        <div className="col-md-6">
           <ChartContainer>
             <RandomInfo
               activeChartFilter={activeChartFilter}
@@ -44,7 +43,7 @@ export default function Stats() {
             />
           </ChartContainer>
         </div>
-        <div className="col">
+        <div className="col-md-6 mt-5 mt-md-0">
           <ChartContainer>
             <BarChart
               statsData={statsData}
@@ -59,5 +58,5 @@ export default function Stats() {
 
 const ChartContainer = styled.div`
   width: 100%;
-  height: 25em;
+  height: 18em;
 `;

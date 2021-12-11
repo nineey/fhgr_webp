@@ -23,27 +23,32 @@ export default function Library() {
     const search = searchQuery ? searchQuery : null;
 
     // Use axios to get data from API
-    const data = (
-      await axios.get("/api/filter", { params: { type, genre, search, page } })
-    ).data;
-    // Response is an array of [itemCounter, [actual data]]
-    // Index 0 = itemCounter
-    // Index 1 = filtered data
-    setData(data[1]);
-    setItemCounter(data[0]);
-    // Calculate maximal number of pages (used for pagination)
-    setMaxPages(Math.ceil(data[0] / 10));
+    try {
+      const data = (
+        await axios.get("/api/filter", {
+          params: { type, genre, search, page },
+        })
+      ).data;
+      // Response is an array of [itemCounter, [actual data]]
+      // Index 0 = itemCounter
+      // Index 1 = filtered data
+      setData(data[1]);
+      setItemCounter(data[0]);
+      // Calculate maximal number of pages (used for pagination)
+      setMaxPages(Math.ceil(data[0] / 10));
 
-    // Added some timeout to see the loading spinner actually spinning :)
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
+      // Added some timeout to see the loading spinner actually spinning :)
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1500);
+    } catch (error) {
+      console.error(error);
+    }
   }, [page, selectedGenre, activeType, searchQuery]);
 
   // Get data on page load or when user sets new filter
   useEffect(() => {
     requestData();
-    return () => console.log("cleaned up");
   }, [requestData]);
 
   return (
