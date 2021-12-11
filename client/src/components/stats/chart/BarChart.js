@@ -13,12 +13,6 @@ import {
 } from "recharts";
 
 export default function ShowChart({ activeChartFilter, statsData }) {
-  // Get total number of items in the the stats array
-  const currentSum = Object.values(statsData).reduce(
-    (sum, currentValue) => sum + currentValue,
-    0
-  );
-
   const data = [
     { name: "2015", chartBarData: statsData[2015] },
     { name: "2016", chartBarData: statsData[2016] },
@@ -32,15 +26,14 @@ export default function ShowChart({ activeChartFilter, statsData }) {
   if (!data) return "Loading ...";
   return (
     <>
-      <div className="lead">
-        Netflix has {currentSum}{" "}
+      <h3 className="mb-5">
         {activeChartFilter === "movie"
           ? "Movies"
           : activeChartFilter === "tv show"
           ? "TV Shows"
-          : "Movies and TV Shows"}{" "}
-        in total
-      </div>
+          : "Movies & TV Shows"}{" "}
+        added per year
+      </h3>
       <ResponsiveContainer width={"100%"} height={"100%"}>
         <BarChart
           className="chart"

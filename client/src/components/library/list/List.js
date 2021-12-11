@@ -1,5 +1,5 @@
 import React from "react";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "../../utils/LoadingSpinner";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { InfoCircle } from "react-bootstrap-icons";

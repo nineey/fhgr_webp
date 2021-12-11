@@ -3,7 +3,7 @@ import TypeFilter from "./filter/TypeFilter";
 import SearchBar from "./filter/SearchBar";
 import GenreSelector from "./filter/GenreSelector";
 import List from "./list/List";
-import ListPagination from "./list/Pagination";
+import ListPagination from "../utils/Pagination";
 import axios from "axios";
 
 export default function Library() {
@@ -26,7 +26,6 @@ export default function Library() {
     const data = (
       await axios.get("/api/filter", { params: { type, genre, search, page } })
     ).data;
-
     // Response is an array of [itemCounter, [actual data]]
     // Index 0 = itemCounter
     // Index 1 = filtered data
@@ -44,6 +43,7 @@ export default function Library() {
   // Get data on page load or when user sets new filter
   useEffect(() => {
     requestData();
+    return () => console.log("cleaned up");
   }, [requestData]);
 
   return (
