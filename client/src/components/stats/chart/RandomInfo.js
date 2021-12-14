@@ -23,7 +23,7 @@ export default function RandomInfo({ activeChartFilter, statsData }) {
       setGenreStats(data);
     };
 
-    if (activeChartFilter === null) getGenres();
+    if (activeChartFilter === "") getGenres();
     if (activeChartFilter === "movie") getTotalNumsMovies();
     if (activeChartFilter === "tv show") getTotalNumsTvShows();
   }, [activeChartFilter]);
