@@ -40,7 +40,7 @@ export default function Library() {
       // Added some timeout to see the loading spinner actually spinning :)
       setTimeout(() => {
         setIsLoading(false);
-      }, 1500);
+      }, 1000);
     } catch (error) {
       console.error(error);
     }
