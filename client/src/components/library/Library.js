@@ -78,9 +78,6 @@ export default function Library() {
       <List
         currentData={data}
         itemCounter={itemCounter}
-        activeType={activeType}
-        selectedGenre={selectedGenre}
-        searchQuery={searchQuery}
         isLoading={isLoading}
       />
       {isLoading || itemCounter === 0 ? (

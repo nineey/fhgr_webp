@@ -5,7 +5,7 @@ const netflixLibrary = require("../../data/netflixData.json");
 // find a single element by showID
 router.get("/", (req, res) => {
   const { showId } = req.query;
-  let responseData = netflixLibrary.find(
+  const responseData = netflixLibrary.find(
     (element) => element.show_id === showId
   );
   res.send(responseData);

@@ -11,7 +11,7 @@ export default function Details() {
   // Get data from API
   useEffect(() => {
     async function fetchData() {
-      let getDetails = (await axios.get(`/api/find?showId=${showId}`)).data;
+      const getDetails = (await axios.get(`/api/find?showId=${showId}`)).data;
       setShowDetails(getDetails);
     }
     fetchData();

@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 
 export default function RandomInfo({ activeChartFilter, statsData }) {
-  // Stats about movies / tv shows / genres
+  // Stats about movies / tv shows and genres
   const [totalNums, setTotalNums] = useState({});
   const [genreStats, setGenreStats] = useState({});
 
@@ -23,7 +23,7 @@ export default function RandomInfo({ activeChartFilter, statsData }) {
       setGenreStats(data);
     };
 
-    if (activeChartFilter === "") getGenres();
+    if (activeChartFilter === null) getGenres();
     if (activeChartFilter === "movie") getTotalNumsMovies();
     if (activeChartFilter === "tv show") getTotalNumsTvShows();
   }, [activeChartFilter]);

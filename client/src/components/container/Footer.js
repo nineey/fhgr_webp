@@ -8,7 +8,7 @@ export default function Footer() {
         <footer>
           <div className="container pt-3">
             <p>
-              Powered by <b>React</b> and <b>Express</b> | by DBM students
+              Powered by <b>React</b> and <b>Express</b>
             </p>
           </div>
         </footer>

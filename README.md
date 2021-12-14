@@ -1,14 +1,13 @@
-# Netflix Library And Stats
+# FilmUp
 
-Building a UI for this Netflix data set:
-https://www.kaggle.com/shivamb/netflix-shows
+#### Netflix Libarary & Stats
+
+This project was part of the lecture _Web development_ at the University of Applied Sciences of the Grisons. The team has built a UI for an existing Netflix data set: https://www.kaggle.com/shivamb/netflix-shows
 
 ## Preview
 
 https://fhgr-webp.herokuapp.com/ \
 ❗Runs on free Heroku dyno: May load for about 20 seconds
-
-#### Work in progress. 🔨
 
 ## Tech stack
 
@@ -17,7 +16,7 @@ https://fhgr-webp.herokuapp.com/ \
 
 ## Installation
 
-Install and run the project with npm
+Install and run the project for development
 
 ```bash
   cd ../fhgr_webp

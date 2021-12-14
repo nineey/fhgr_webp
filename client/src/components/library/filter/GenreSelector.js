@@ -6,6 +6,7 @@ export default function GenreSelector({ setSelectedGenre, setPage }) {
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
+    // Get list of all genres from API
     const getFullGenreList = async () => {
       const allGenres = (await axios.get(`/api/genre/all`)).data;
       setGenres(allGenres);

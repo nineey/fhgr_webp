@@ -41,8 +41,6 @@ router.get("/byYear", (req, res) => {
 
 /********* NUMBER OF TITLES GROUPED BY GENRE *********/
 router.get("/byGenre", (req, res) => {
-  let filteredData = netflixLibrary;
-
   const getAllGenres = netflixLibrary.map((e) => {
     // Extract the genre array
     const getGenre = e.listed_in;
@@ -70,7 +68,7 @@ router.get("/total/duration/movies", (req, res) => {
   const getAllMovies = netflixLibrary.filter((e) => e.type === "Movie");
 
   const getAllDuration = getAllMovies.map((e) => {
-    // Extract the genre array
+    // Extract the duration
     const getDuration = e.duration;
     // Remove "... min" at the end and parse to Integer
     const getNumOnly = parseInt(getDuration.slice(0, -4));
@@ -98,7 +96,7 @@ router.get("/total/duration/tvshows", (req, res) => {
   const getAllTvShows = netflixLibrary.filter((e) => e.type === "TV Show");
 
   const getAllDuration = getAllTvShows.map((e) => {
-    // Extract the genre array
+    // Extract the duration
     const getDuration = e.duration;
     // Remove "... Seasons" at the end and parse to Integer
     const getNumOnly = parseInt(getDuration.slice(0, -6));
