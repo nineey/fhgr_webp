@@ -40,7 +40,7 @@ export default function Library() {
       // Added some timeout to see the loading spinner actually spinning :)
       setTimeout(() => {
         setIsLoading(false);
-      }, 1000);
+      }, 500);
     } catch (error) {
       console.error(error);
     }
@@ -75,6 +75,7 @@ export default function Library() {
           />
         </div>
       </div>
+
       <List
         currentData={data}
         itemCounter={itemCounter}

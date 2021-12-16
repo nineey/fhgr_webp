@@ -3,6 +3,7 @@ import LoadingSpinner from "../../utils/LoadingSpinner";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { InfoCircle } from "react-bootstrap-icons";
+import Fade from "react-reveal/Fade";
 
 export default function List({ currentData, itemCounter, isLoading }) {
   if (isLoading) {
@@ -14,37 +15,39 @@ export default function List({ currentData, itemCounter, isLoading }) {
   }
 
   return (
-    <section className="mainSection">
-      <div className="lead mt-3">#Items: {itemCounter}</div>
-      <StyledTable className="table table-sm mt-5">
-        <thead>
-          <tr>
-            <th scope="col">Type</th>
-            <th scope="col">Title</th>
-            <th scope="col">Genre</th>
-            <th scope="col">Details</th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* Loop the filtered list and show elements in table */}
-          {currentData.map((netflixElement) => (
-            <tr key={netflixElement.show_id}>
-              <td>{netflixElement.type}</td>
-              <td>{netflixElement.title}</td>
-              <td>{netflixElement.listed_in}</td>
-              <td>
-                {/* Link to particular detail page */}
-                <Link to={`details/${netflixElement.show_id}`}>
-                  <StyledInfoIcon>
-                    <InfoCircle />
-                  </StyledInfoIcon>
-                </Link>
-              </td>
+    <Fade>
+      <section className="mainSection">
+        <div className="lead mt-3">#Items: {itemCounter}</div>
+        <StyledTable className="table table-sm mt-5">
+          <thead>
+            <tr>
+              <th scope="col">Type</th>
+              <th scope="col">Title</th>
+              <th scope="col">Genre</th>
+              <th scope="col">Details</th>
             </tr>
-          ))}
-        </tbody>
-      </StyledTable>
-    </section>
+          </thead>
+          <tbody>
+            {/* Loop the filtered list and show elements in table */}
+            {currentData.map((netflixElement) => (
+              <tr key={netflixElement.show_id}>
+                <td>{netflixElement.type}</td>
+                <td>{netflixElement.title}</td>
+                <td>{netflixElement.listed_in}</td>
+                <td>
+                  {/* Link to particular detail page */}
+                  <Link to={`details/${netflixElement.show_id}`}>
+                    <StyledInfoIcon>
+                      <InfoCircle />
+                    </StyledInfoIcon>
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </StyledTable>
+      </section>
+    </Fade>
   );
 }
 
