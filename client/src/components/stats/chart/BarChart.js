@@ -1,4 +1,6 @@
 import React from "react";
+import LoadingSpinner from "../../utils/LoadingSpinner";
+
 // Source: https://recharts.org/en-US/examples/SimpleBarChart
 import {
   BarChart,
@@ -23,7 +25,7 @@ export default function ShowChart({ activeChartFilter, statsData }) {
     { name: "2021", chartBarData: statsData[2021] },
   ];
 
-  if (!data) return "Loading ...";
+  if (!data) return <LoadingSpinner />;
   return (
     <>
       <h3 className="mb-5">

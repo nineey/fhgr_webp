@@ -5,18 +5,19 @@ import Fade from "react-reveal/Fade";
 
 export default function RandomInfo({ activeChartFilter, statsData }) {
   // Stats about movies / tv shows and genres
-  const [totalNums, setTotalNums] = useState({});
+  const [totalNumsMovies, setTotalNumsMovies] = useState({});
+  const [totalNumsShows, setTotalNumsShows] = useState({});
   const [genreStats, setGenreStats] = useState({});
 
   useEffect(() => {
     const getTotalNumsMovies = async () => {
       const data = (await axios.get(`/api/stats/total/duration/movies`)).data;
-      setTotalNums(data);
+      setTotalNumsMovies(data);
     };
 
     const getTotalNumsTvShows = async () => {
       const data = (await axios.get(`/api/stats/total/duration/tvshows`)).data;
-      setTotalNums(data);
+      setTotalNumsShows(data);
     };
 
     const getGenres = async () => {
@@ -24,10 +25,10 @@ export default function RandomInfo({ activeChartFilter, statsData }) {
       setGenreStats(data);
     };
 
-    if (activeChartFilter === "") getGenres();
-    if (activeChartFilter === "movie") getTotalNumsMovies();
-    if (activeChartFilter === "tv show") getTotalNumsTvShows();
-  }, [activeChartFilter]);
+    getGenres();
+    getTotalNumsMovies();
+    getTotalNumsTvShows();
+  }, []);
 
   return (
     <StyledContainer>
@@ -35,32 +36,39 @@ export default function RandomInfo({ activeChartFilter, statsData }) {
         <h3>Did you know? </h3>
         {activeChartFilter === "movie" ? (
           <>
-            <div className="lead mt-5 mb-3">
-              Watching every movie would take:
+            <div className="lead mt-5">
+              The library includes <BigNum>{statsData.totalSum}</BigNum> Movies.
+            </div>
+            <div className="lead mt-3 mb-3">
+              Watching every movie would take
             </div>
 
             <div className="lead">
-              <BigNum>{totalNums["m"]}</BigNum> minutes
+              <BigNum>{totalNumsMovies["m"]}</BigNum> minutes
             </div>
             <div className="lead">
-              that's <BigNum>{totalNums["h"]}</BigNum> hours
+              that's <BigNum>{totalNumsMovies["h"]}</BigNum> hours
             </div>
             <div className="lead">
-              or <BigNum>{totalNums["d"]}</BigNum> days
+              or <BigNum>{totalNumsMovies["d"]}</BigNum> days.
             </div>
           </>
         ) : activeChartFilter === "tv show" ? (
           <>
-            <div className="lead mt-5 mb-3">All TV shows together have:</div>
+            <div className="lead mt-5">
+              The library includes <BigNum>{statsData.totalSum}</BigNum> TV
+              Shows.
+            </div>
+            <div className="lead mt-3 mb-3">All TV shows together have</div>
 
             <div className="lead">
-              <BigNum>{totalNums["seasons"]}</BigNum> seasons
+              <BigNum>{totalNumsShows["seasons"]}</BigNum> seasons.
             </div>
           </>
         ) : (
           <>
             <div className="lead mt-5">
-              The library has <BigNum>{statsData["totalSum"]}</BigNum> Movies
+              The library includes <BigNum>{statsData.totalSum}</BigNum> Movies
               and TV shows
             </div>
             <div className="lead">
