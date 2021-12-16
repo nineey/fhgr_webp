@@ -4,10 +4,12 @@ import BarChart from "./chart/BarChart";
 import TypeFilter from "./chartFilter/TypeFilter";
 import axios from "axios";
 import RandomInfo from "./chart/RandomInfo";
+import LoadingSpinner from "../utils/LoadingSpinner";
 
 export default function Stats() {
   const [activeChartFilter, setActiveChartFilter] = useState("");
   const [statsData, setStatsData] = useState({});
+  const [isLoading, setLoading] = useState(true);
 
   // Get stats data from server
   // Response is an object: {year: counter, year: counter, ... totalSum: sum}
@@ -18,11 +20,14 @@ export default function Stats() {
       })
     ).data;
     setStatsData(statsData);
+    setLoading(false);
   }, [activeChartFilter]);
 
   useEffect(() => {
     getStats();
   }, [getStats]);
+
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <>
