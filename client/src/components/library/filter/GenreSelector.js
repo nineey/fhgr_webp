@@ -4,12 +4,18 @@ import Select from "react-select";
 
 export default function GenreSelector({ setSelectedGenre, setPage }) {
   const [genres, setGenres] = useState([]);
+  const [placeholder, setPlaceholder] = useState("Select genre ...");
 
   useEffect(() => {
     // Get list of all genres from API
     const getFullGenreList = async () => {
-      const allGenres = (await axios.get(`/api/genre/all`)).data;
-      setGenres(allGenres);
+      try {
+        const allGenres = (await axios.get(`/api/genre/all`)).data;
+        setGenres(allGenres);
+      } catch (error) {
+        setPlaceholder("Genre not found");
+        console.error(error);
+      }
     };
     getFullGenreList();
   }, []);
@@ -28,7 +34,7 @@ export default function GenreSelector({ setSelectedGenre, setPage }) {
   // Return genre selector from 'react-select'
   return (
     <Select
-      placeholder="Select genre ..."
+      placeholder={placeholder}
       className="mt-3 w-50 text-dark"
       options={options}
       onChange={handlePageOnChange}

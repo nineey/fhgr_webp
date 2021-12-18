@@ -5,14 +5,13 @@ import { Link } from "react-router-dom";
 import { InfoCircle } from "react-bootstrap-icons";
 import Fade from "react-reveal/Fade";
 
-export default function List({ currentData, itemCounter, isLoading }) {
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+export default function List({ currentData, itemCounter, isLoading, error }) {
+  if (isLoading) return <LoadingSpinner />;
 
-  if (!isLoading && itemCounter === 0) {
+  if (error) return <div className="mt-5">{error}</div>;
+
+  if (!isLoading && itemCounter === 0)
     return <div className="lead mt-5">No matches :(</div>;
-  }
 
   return (
     <Fade>

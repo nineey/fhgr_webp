@@ -15,6 +15,7 @@ export default function Library() {
   const [maxPages, setMaxPages] = useState(1);
   const [itemCounter, setItemCounter] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
 
   // Request data from API according to filters in front app
   const requestData = useCallback(async () => {
@@ -29,21 +30,17 @@ export default function Library() {
           params: { type, genre, search, page },
         })
       ).data;
-      // Response is an array of [itemCounter, [actual data]]
-      // Index 0 = itemCounter
-      // Index 1 = filtered data
+      // Response is an array of [itemCounter(idx 0), [actual data](idx 1)]
       setData(data[1]);
       setItemCounter(data[0]);
       // Calculate maximal number of pages (used for pagination)
       setMaxPages(Math.ceil(data[0] / 10));
-
-      // Added some timeout to see the loading spinner actually spinning :)
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
     } catch (error) {
       console.error(error);
+      setError("Can't connect to the server...");
     }
+    // Added some timeout to see the loading spinner actually spinning :)
+    setTimeout(() => setIsLoading(false), 200);
   }, [page, selectedGenre, activeType, searchQuery]);
 
   // Get data on page load or when user sets new filter
@@ -80,8 +77,9 @@ export default function Library() {
         currentData={data}
         itemCounter={itemCounter}
         isLoading={isLoading}
+        error={error}
       />
-      {isLoading || itemCounter === 0 ? (
+      {isLoading || itemCounter === 0 || error ? (
         ""
       ) : (
         <ListPagination page={page} setPage={setPage} maxPages={maxPages} />

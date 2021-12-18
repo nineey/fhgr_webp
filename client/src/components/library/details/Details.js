@@ -7,6 +7,7 @@ import Fade from "react-reveal/Fade";
 export default function Details() {
   const [showDetails, setShowDetails] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   // Get the current show id from URL param
   const { showId } = useParams();
@@ -14,14 +15,21 @@ export default function Details() {
   // Get data from API
   useEffect(() => {
     async function fetchData() {
-      const getDetails = (await axios.get(`/api/find?showId=${showId}`)).data;
-      setShowDetails(getDetails);
+      try {
+        const getDetails = (await axios.get(`/api/find?showId=${showId}`)).data;
+        setShowDetails(getDetails);
+      } catch (error) {
+        setError("Can't connect to the server...");
+        console.error(error);
+      }
+      setTimeout(() => setLoading(false), 200);
     }
+
     fetchData();
-    setTimeout(() => setLoading(false), 500);
   }, [showId]);
 
   if (isLoading) return <LoadingSpinner />;
+  if (error) return <div>{error}</div>;
 
   return (
     <>

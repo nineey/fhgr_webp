@@ -10,16 +10,22 @@ export default function Stats() {
   const [activeChartFilter, setActiveChartFilter] = useState("");
   const [statsData, setStatsData] = useState({});
   const [isLoading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   // Get stats data from server
   // Response is an object: {year: counter, year: counter, ... totalSum: sum}
   const getStats = useCallback(async () => {
-    const statsData = (
-      await axios.get(`/api/stats/byYear`, {
-        params: { type: activeChartFilter },
-      })
-    ).data;
-    setStatsData(statsData);
+    try {
+      const statsData = (
+        await axios.get(`/api/stats/byYear`, {
+          params: { type: activeChartFilter },
+        })
+      ).data;
+      setStatsData(statsData);
+    } catch (error) {
+      console.error(error);
+      setError("Can't connect to the server...");
+    }
     setLoading(false);
   }, [activeChartFilter]);
 
@@ -28,6 +34,7 @@ export default function Stats() {
   }, [getStats]);
 
   if (isLoading) return <LoadingSpinner />;
+  if (error) return <div>{error}</div>;
 
   return (
     <>
