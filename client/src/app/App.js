@@ -13,6 +13,7 @@ import Library from "../components/library/Library";
 import Stats from "../components/stats/Stats";
 import Details from "../components/library/details/Details";
 import Footer from "../components/container/Footer";
+import Page404 from "../components/utils/Page404";
 
 class App extends Component {
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
             <Route path="/" element={<Library />} />
             <Route path="/stats" element={<Stats />} />
             <Route path="/details/:showId" element={<Details />} />
+            <Route path="*" element={<Page404 />} />
           </Routes>
         </StyledApp>
         <Footer />
