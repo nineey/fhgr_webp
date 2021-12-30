@@ -2,17 +2,7 @@ import React from "react";
 import LoadingSpinner from "../../utils/LoadingSpinner";
 
 // Source: https://recharts.org/en-US/examples/SimpleBarChart
-import {
-  BarChart,
-  Bar,
-  // Cell,
-  XAxis,
-  YAxis,
-  // CartesianGrid,
-  // Tooltip,
-  // Legend,
-  ResponsiveContainer,
-} from "recharts";
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from "recharts";
 
 export default function ShowChart({ activeChartFilter, statsData }) {
   const data = [

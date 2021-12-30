@@ -34,6 +34,7 @@ router.get("/byYear", (req, res) => {
     0
   );
 
+  // add totalSum to responseData
   Object.assign(getNumsByYear, { totalSum: totalSum });
   const reponseData = getNumsByYear;
   res.send(reponseData);
@@ -55,6 +56,7 @@ router.get("/byGenre", (req, res) => {
     .flat()
     .reduce((r, c) => ((r[c] = (r[c] || 0) + 1), r), {});
 
+  // count the number of different genres and add result to responseData
   const gerneCounter = Object.keys(getNumsByGenre);
   const reponseData = {
     totalOfGenres: gerneCounter.length,

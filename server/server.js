@@ -16,8 +16,7 @@ app.use("/api/find", require("./routes/api/find"));
 // Params: type, genre, search, page
 app.use("/api/filter", require("./routes/api/filter"));
 
-// Get stats about date added on Netflix
-// Params: type
+// Get various stats about date added, genre, types, ...
 app.use("/api/stats", require("./routes/api/stats"));
 
 // Get all available genres
