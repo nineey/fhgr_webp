@@ -22,10 +22,14 @@ const StyledFooter = styled.div`
     background-color: var(--secondary-color);
     height: 3.5em;
     bottom: 0;
-    margin-top: 5em;
+    margin-top: 4.8em;
   }
 
   p {
     color: var(--primary-color);
+  }
+
+  @media (max-width: 1030px) {
+    margin-top: 7em;
   }
 `;

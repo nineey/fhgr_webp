@@ -31,54 +31,49 @@ export default function RandomInfo({ activeChartFilter, statsData }) {
   }, []);
 
   return (
-    <StyledContainer>
-      <Fade>
-        <h3>Did you know? </h3>
-        {activeChartFilter === "movie" ? (
-          <>
-            <div className="lead mt-5">
-              The library includes <BigNum>{statsData.totalSum}</BigNum> Movies.
-            </div>
-            <div className="lead mt-3 mb-3">
-              Watching every movie would take
-            </div>
+    <Fade>
+      <h3>Did you know? </h3>
+      {activeChartFilter === "movie" ? (
+        <>
+          <div className="lead mt-5">
+            The library includes <BigNum>{statsData.totalSum}</BigNum> Movies.
+          </div>
+          <div className="lead mt-3 mb-3">Watching every movie would take</div>
 
-            <div className="lead">
-              <BigNum>{totalNumsMovies["m"]}</BigNum> minutes
-            </div>
-            <div className="lead">
-              that's <BigNum>{totalNumsMovies["h"]}</BigNum> hours
-            </div>
-            <div className="lead">
-              or <BigNum>{totalNumsMovies["d"]}</BigNum> days.
-            </div>
-          </>
-        ) : activeChartFilter === "tv show" ? (
-          <>
-            <div className="lead mt-5">
-              The library includes <BigNum>{statsData.totalSum}</BigNum> TV
-              Shows.
-            </div>
-            <div className="lead mt-3 mb-3">All TV shows together have</div>
+          <div className="lead">
+            <BigNum>{totalNumsMovies["m"]}</BigNum> minutes
+          </div>
+          <div className="lead">
+            that's <BigNum>{totalNumsMovies["h"]}</BigNum> hours
+          </div>
+          <div className="lead">
+            or <BigNum>{totalNumsMovies["d"]}</BigNum> days.
+          </div>
+        </>
+      ) : activeChartFilter === "tv show" ? (
+        <>
+          <div className="lead mt-5">
+            The library includes <BigNum>{statsData.totalSum}</BigNum> TV Shows.
+          </div>
+          <div className="lead mt-3 mb-3">All TV shows together have</div>
 
-            <div className="lead">
-              <BigNum>{totalNumsShows["seasons"]}</BigNum> seasons.
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="lead mt-5">
-              The library includes <BigNum>{statsData.totalSum}</BigNum> Movies
-              and TV shows
-            </div>
-            <div className="lead">
-              from <BigNum>{genreStats["totalOfGenres"]}</BigNum> different
-              genres.
-            </div>
-          </>
-        )}
-      </Fade>
-    </StyledContainer>
+          <div className="lead">
+            <BigNum>{totalNumsShows["seasons"]}</BigNum> seasons.
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="lead mt-5">
+            The library includes <BigNum>{statsData.totalSum}</BigNum> Movies
+            and TV shows
+          </div>
+          <div className="lead">
+            from <BigNum>{genreStats["totalOfGenres"]}</BigNum> different
+            genres.
+          </div>
+        </>
+      )}
+    </Fade>
   );
 }
 
@@ -86,8 +81,4 @@ const BigNum = styled.strong`
   font-size: 1.5em;
   font-weight: 500;
   margin-top: -15px;
-`;
-
-const StyledContainer = styled.div`
-  height: 16em !important;
 `;
