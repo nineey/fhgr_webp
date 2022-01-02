@@ -1,3 +1,7 @@
+/* ----------------------------------------
+ This component represents the page "/stats"
+----------------------------------------- */
+
 import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import BarChart from "./chart/BarChart";
@@ -48,12 +52,10 @@ export default function Stats() {
       </div>
       <div className="row mt-5">
         <div className="col-md-6">
-          {/* <ChartContainer> */}
           <RandomInfo
             activeChartFilter={activeChartFilter}
             statsData={statsData}
           />
-          {/* </ChartContainer> */}
         </div>
         <div className="col-md-6 mt-3 mt-md-0">
           <hr className="d-block d-md-none mb-4" />

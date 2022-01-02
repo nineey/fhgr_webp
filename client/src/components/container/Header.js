@@ -1,14 +1,15 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
     <div className="app-header mt-5">
       <div>
         <h1>
-          FilmUp!
+          <NavLink to="/">FilmUp!</NavLink>
           <br />
         </h1>
-        <h2>The Ultimate Netflix Library &#38; Stats</h2>
+        <h2>The Netflix Library &#38; Stats</h2>
       </div>
       <div className="lead">
         We present you a full list of every Netflix show available in the US.

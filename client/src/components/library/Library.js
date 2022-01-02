@@ -1,3 +1,7 @@
+/* ----------------------------------------
+ This component represents the page "/"
+----------------------------------------- */
+
 import React, { useState, useEffect, useCallback } from "react";
 import TypeFilter from "./filter/TypeFilter";
 import SearchBar from "./filter/SearchBar";

@@ -2,7 +2,10 @@ const express = require("express");
 const router = express.Router();
 const netflixLibrary = require("../../data/netflixData.json");
 
-/******* NUMBER OF TITLES GROUPED BY YEAR *******/
+/* ----------------------------------------
+NUMBER OF TITLES GROUPED BY YEAR
+----------------------------------------- */
+
 router.get("/byYear", (req, res) => {
   const { type } = req.query;
   let filteredData = netflixLibrary;
@@ -40,7 +43,10 @@ router.get("/byYear", (req, res) => {
   res.send(reponseData);
 });
 
-/********* NUMBER OF TITLES GROUPED BY GENRE *********/
+/* ----------------------------------------
+NUMBER OF TITLES GROUPED BY GENRE
+----------------------------------------- */
+
 router.get("/byGenre", (req, res) => {
   const getAllGenres = netflixLibrary.map((e) => {
     // Extract the genre array
@@ -65,7 +71,10 @@ router.get("/byGenre", (req, res) => {
   res.send(reponseData);
 });
 
-/********* TOTAL MINUTES OF ALL MOVIES *********/
+/* ----------------------------------------
+TOTAL MINUTES OF ALL MOVIES
+----------------------------------------- */
+
 router.get("/total/duration/movies", (req, res) => {
   const getAllMovies = netflixLibrary.filter((e) => e.type === "Movie");
 
@@ -93,7 +102,10 @@ router.get("/total/duration/movies", (req, res) => {
   res.send(reponseData);
 });
 
-/********* TOTAL SEASONS OF ALL TV SHOWS *********/
+/* ----------------------------------------
+TOTAL SEASONS OF ALL TV SHOWS
+----------------------------------------- */
+
 router.get("/total/duration/tvshows", (req, res) => {
   const getAllTvShows = netflixLibrary.filter((e) => e.type === "TV Show");
 
