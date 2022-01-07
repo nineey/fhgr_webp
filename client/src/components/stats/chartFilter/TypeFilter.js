@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../../../app/App";
 
 export default function ChartFilter({
   activeChartFilter,
   setActiveChartFilter,
 }) {
+  const [darkTheme] = useContext(ThemeContext);
+
   // Handling style for active/inactive buttons
-  const className = "btn btn-outline-light";
-  const classNameActive = "btn btn-outline-light active";
+  const className =
+    darkTheme === true ? "btn btn-outline-light" : "btn btn-outline-dark";
+  const classNameActive =
+    darkTheme === true
+      ? "btn btn-outline-light active"
+      : "btn btn-outline-dark active";
 
   return (
     <>

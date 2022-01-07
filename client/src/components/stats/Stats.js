@@ -52,10 +52,12 @@ export default function Stats() {
       </div>
       <div className="row mt-5">
         <div className="col-md-6">
-          <RandomInfo
-            activeChartFilter={activeChartFilter}
-            statsData={statsData}
-          />
+          <RandomInfoContainer>
+            <RandomInfo
+              activeChartFilter={activeChartFilter}
+              statsData={statsData}
+            />
+          </RandomInfoContainer>
         </div>
         <div className="col-md-6 mt-3 mt-md-0">
           <hr className="d-block d-md-none mb-4" />
@@ -74,4 +76,10 @@ export default function Stats() {
 const ChartContainer = styled.div`
   width: 100%;
   height: 18em;
+`;
+
+const RandomInfoContainer = styled.div`
+  @media only screen and (min-width: 768px) {
+    min-height: 20.5em;
+  }
 `;

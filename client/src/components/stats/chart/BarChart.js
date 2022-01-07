@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import LoadingSpinner from "../../utils/LoadingSpinner";
+import { ThemeContext } from "../../../app/App";
 
 // Source: https://recharts.org/en-US/examples/SimpleBarChart
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from "recharts";
 
 export default function ShowChart({ activeChartFilter, statsData }) {
+  const [darkTheme] = useContext(ThemeContext);
+
   const data = [
     { name: "2015", chartBarData: statsData[2015] },
     { name: "2016", chartBarData: statsData[2016] },
@@ -14,6 +17,8 @@ export default function ShowChart({ activeChartFilter, statsData }) {
     { name: "2020", chartBarData: statsData[2020] },
     { name: "2021", chartBarData: statsData[2021] },
   ];
+
+  const fillColor = darkTheme === true ? "#fff" : "#18181B";
 
   if (!data) return <LoadingSpinner />;
   return (
@@ -41,7 +46,7 @@ export default function ShowChart({ activeChartFilter, statsData }) {
         >
           <XAxis dataKey="name" />
           <YAxis type="number" domain={[0, 2016]} />
-          <Bar dataKey="chartBarData" stackId="a" fill="#ffffff" />
+          <Bar dataKey="chartBarData" stackId="a" fill={fillColor} />
         </BarChart>
       </ResponsiveContainer>
     </>

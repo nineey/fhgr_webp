@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
-    <div className="app-header mt-5">
+    <div className="app-header">
       <div>
         <h1>
           <NavLink to="/">FilmUp!</NavLink>
@@ -11,7 +11,7 @@ export default function Header() {
         </h1>
         <h2>The Netflix Library &#38; Stats</h2>
       </div>
-      <div className="lead">
+      <div>
         We present you a full list of every Netflix show available in the US.
         <br />
         Jump into stats to get more details about the library's development

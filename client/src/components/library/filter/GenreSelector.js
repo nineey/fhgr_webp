@@ -33,13 +33,15 @@ export default function GenreSelector({ setSelectedGenre, setPage }) {
 
   // Return genre selector from 'react-select'
   return (
-    <Select
-      placeholder={placeholder}
-      className="mt-3 w-50 text-dark"
-      options={options}
-      onChange={handlePageOnChange}
-      isClearable={true}
-      clearValue={null} // When select is empty, then value = null
-    />
+    <>
+      <Select
+        placeholder={placeholder}
+        className="mt-3 w-50 text-dark"
+        options={options}
+        onChange={handlePageOnChange}
+        isClearable={true}
+        clearValue={null} // When select is empty, then value = null
+      />
+    </>
   );
 }

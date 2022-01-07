@@ -44,7 +44,7 @@ const StyledFooter = styled.div`
     background-color: var(--secondary-color);
     height: 3.7em;
     bottom: 0;
-    margin-top: 4.8em;
+    margin-top: 5em;
   }
 
   .poweredBy {

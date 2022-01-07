@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../../../app/App";
 
 export default function TypeFilter({ activeType, setActiveType, setPage }) {
+  const [darkTheme] = useContext(ThemeContext);
+
   // Used for handling active class of a button
-  const className = "btn btn-outline-light";
+  const className =
+    darkTheme === true ? "btn btn-outline-light" : "btn btn-outline-dark";
 
   return (
     <div className="btn-group" role="group" aria-label="Basic example">
