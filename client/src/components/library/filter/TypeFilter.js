@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { ThemeContext } from "../../../app/App";
+import ThemeContext from "../../../app/ThemeContext";
 
 export default function TypeFilter({ activeType, setActiveType, setPage }) {
-  const [darkTheme] = useContext(ThemeContext);
+  const { darkTheme } = useContext(ThemeContext);
 
   // Used for handling active class of a button
   const className =

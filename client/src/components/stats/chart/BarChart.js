@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import LoadingSpinner from "../../utils/LoadingSpinner";
-import { ThemeContext } from "../../../app/App";
+import ThemeContext from "../../../app/ThemeContext";
 
 // Source: https://recharts.org/en-US/examples/SimpleBarChart
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from "recharts";
 
 export default function ShowChart({ activeChartFilter, statsData }) {
-  const [darkTheme] = useContext(ThemeContext);
+  const { darkTheme } = useContext(ThemeContext);
 
   const data = [
     { name: "2015", chartBarData: statsData[2015] },

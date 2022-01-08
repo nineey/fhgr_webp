@@ -45,6 +45,7 @@ export default function Library() {
     }
     // Added some timeout to see the loading spinner actually spinning :)
     setTimeout(() => setIsLoading(false), 200);
+    // Perform new request whenever a filter or the page changes
   }, [page, selectedGenre, activeType, searchQuery]);
 
   // Get data on page load or when user sets new filter
@@ -83,6 +84,7 @@ export default function Library() {
         isLoading={isLoading}
         error={error}
       />
+      {/* when loading || no items found || request error -> do not show pagination */}
       {isLoading || itemCounter === 0 || error ? (
         ""
       ) : (

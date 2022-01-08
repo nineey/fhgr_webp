@@ -3,10 +3,10 @@
 import React, { useContext } from "react";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
-import { ThemeContext } from "../../app/App";
+import ThemeContext from "../../app/ThemeContext";
 
 export default function LoadingSpinner() {
-  const [darkTheme] = useContext(ThemeContext);
+  const { darkTheme } = useContext(ThemeContext);
   const spinnerColor = darkTheme === true ? "#fff" : "#18181B";
   return (
     <Loader

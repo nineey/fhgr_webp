@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { ThemeContext } from "../../../app/App";
+import ThemeContext from "../../../app/ThemeContext";
 
 export default function ChartFilter({
   activeChartFilter,
   setActiveChartFilter,
 }) {
-  const [darkTheme] = useContext(ThemeContext);
+  const { darkTheme } = useContext(ThemeContext);
 
   // Handling style for active/inactive buttons
   const className =

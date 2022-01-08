@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Switch } from "react-darkreader";
-import { ThemeContext } from "../../app/App";
+import ThemeContext from "../../app/ThemeContext";
 
 export default function ThemeToggle() {
-  const [darkTheme, setDarkTheme] = useContext(ThemeContext);
+  const { darkTheme, setDarkTheme } = useContext(ThemeContext);
 
-  // set theme value to localStorage whenever switch is toggled
+  // Set theme value (darkTheme: true/false) to localStorage whenever switch is toggled
   localStorage.setItem("darkTheme", JSON.stringify(darkTheme));
 
   return (
