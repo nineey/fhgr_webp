@@ -7,7 +7,7 @@ export default function GenreSelector({ setSelectedGenre, setPage }) {
   const [placeholder, setPlaceholder] = useState("Select genre ...");
 
   useEffect(() => {
-    // Get list of all genres from API
+    // Get list of all genres from API on page load
     const getFullGenreList = async () => {
       try {
         const allGenres = (await axios.get(`/api/genre/all`)).data;
@@ -25,7 +25,7 @@ export default function GenreSelector({ setSelectedGenre, setPage }) {
     return { value: e, label: e };
   });
 
-  // Set selected genre and at the same time page = 1
+  // Set selected genre and reset page = 1
   function handlePageOnChange(e) {
     setSelectedGenre(e);
     setPage(1);

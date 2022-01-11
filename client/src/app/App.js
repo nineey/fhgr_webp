@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./ThemeContext";
 
 // import styles
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -13,7 +14,6 @@ import Stats from "../components/stats/Stats";
 import Details from "../components/library/details/Details";
 import Footer from "../components/container/Footer";
 import Page404 from "../components/utils/Page404";
-import { ThemeProvider } from "./ThemeContext";
 
 export default function App() {
   return (
