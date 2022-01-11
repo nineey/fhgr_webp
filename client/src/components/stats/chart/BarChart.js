@@ -8,6 +8,7 @@ import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from "recharts";
 export default function ShowChart({ activeChartFilter, statsData }) {
   const { darkTheme } = useContext(ThemeContext);
 
+  // prepare data for bar chart
   const data = [
     { name: "2015", chartBarData: statsData[2015] },
     { name: "2016", chartBarData: statsData[2016] },

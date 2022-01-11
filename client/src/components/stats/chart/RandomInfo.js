@@ -9,6 +9,7 @@ export default function RandomInfo({ activeChartFilter, statsData }) {
   const [totalNumsShows, setTotalNumsShows] = useState({});
   const [genreStats, setGenreStats] = useState({});
 
+  // get all stats on first render
   useEffect(() => {
     const getTotalNumsMovies = async () => {
       const data = (await axios.get(`/api/stats/total/duration/movies`)).data;

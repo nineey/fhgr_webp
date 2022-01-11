@@ -16,7 +16,7 @@ export default function Stats() {
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Get stats data from server
+  // Get stats data on first render and everytime when chart filter changes
   // Response is an object: {year: counter, year: counter, ... totalSum: sum}
   const getStats = useCallback(async () => {
     try {
